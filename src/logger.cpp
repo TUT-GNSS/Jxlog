@@ -2,18 +2,23 @@
 
 namespace logger
 {
+Logger::Logger(std::string name, LogSinkPtr sink) : name_{std::move(name)},
+                                                    level_{LogLevel::kInfo}, 
+                                                    sinks_{std::move(sink)}{}
 
-Logger::Logger(std::string name, LogSinkPtrInitList sinks):name_{std::move(name)},level_{LogLevel::kInfo}{
+
+Logger::Logger(std::string name, LogSinkPtrInitList sinks):name_{std::move(name)},
+                                                           level_{LogLevel::kInfo}{
   for(auto& sink : sinks){
-    sinks.emplace_back(std::move(sink));
+    sinks_.push_back(std::move(sink));
   }
 }
 
-Logger::Logger(Logger &&other) noexcept :name_(std::move(other.name)),
+Logger::Logger(Logger &&other) noexcept :name_(std::move(other.name_)),
                                                 sinks_(std::move(other.sinks_)),
-                                                level_(other.level_){}
+                                                level_(other.level_.load(std::memory_order_relaxed)){}
 
-Logger::Logger& operator = (Logger other) noexcept {
+Logger& Logger::operator= (Logger other) noexcept {
   //copy and swap
   name_.swap(other.name_);
   sinks_.swap(other.sinks_);
@@ -23,7 +28,12 @@ Logger::Logger& operator = (Logger other) noexcept {
   other.level_.store(my_level);
 }  
 
-void Logger::set_level(LogLevel level){
+Logger::~Logger(){
+  std::cout<<"logger析构"<<"\n";
+}
+
+
+void Logger::SetLevel(LogLevel level){
   level_ = level;
 }
 
@@ -43,7 +53,7 @@ void Logger::Log(LogLevel level, SourceLocation loc, StringView message){
 
 void Logger::Log_(const LogMsg& msg){
 //   sink_it_(msg);
-  for(auto& sink:sinks){
+  for(auto& sink:sinks_){
     sink->Log(msg);
   }
 }
