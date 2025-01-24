@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/logger.dir/test.cpp.o CMakeFiles/logger.dir/logger.cpp.o CMakeFiles/logger.dir/formatter/default_formatter.cpp.o CMakeFiles/logger.dir/sinks/console_sink.cpp.o -o logger

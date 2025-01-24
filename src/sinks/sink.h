@@ -1,16 +1,20 @@
 #pragma once
 
-#include "../log_common.h"
-#include "../log_msg.h"
+#include "log_common.h"
+#include "log_msg.h"
+
+#include "formatter/formatter.h"
 
 namespace logger{
 
-class LogSink{
+class Sink{
 public:
-    LogSink() =default;
-    ~LogSink() = default;
-    void Log(const LogMsg& log_msg){
-        std::cout<<"log"<<"\n";
-    }
+  virtual ~Sink() = default;
+
+  virtual void Log(const LogMsg& msg) = 0;
+
+  virtual void SetFormatter(std::unique_ptr<Formatter> formatter) = 0;
+
+  virtual void Flush() {}
 };
-}
+} // namespace logger

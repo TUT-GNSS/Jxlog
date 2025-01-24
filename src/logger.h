@@ -15,21 +15,21 @@
 
 namespace logger
 {
-class LogSink;//前置声明、pimpl模式
-using LogSinkPtr = std::shared_ptr<LogSink>;
-using LogSinkPtrInitList = std::initializer_list<LogSink>;
+class Sink;//前置声明、pimpl模式
+using SinkPtr = std::shared_ptr<Sink>;
+using SinkPtrInitList = std::initializer_list<SinkPtr>;
 
 class Logger
 {
 public:
-  explicit Logger(std::string name, LogSinkPtr sink);
-  explicit Logger(std::string name, LogSinkPtrInitList sinks);
+  explicit Logger(std::string name, SinkPtr sink);
+  explicit Logger(std::string name, SinkPtrInitList sinks);
   explicit Logger(Logger &&other) noexcept;
   Logger& operator= (Logger other) noexcept;
 
   //根据存储sink的容器迭代器构造
   template <typename It>
-  Logger(std::string name, It begin, It end) : Logger(name, LogSinkPtrInitList(begin, end)) {}
+  Logger(std::string name, It begin, It end) : Logger(name, SinkPtrInitList(begin, end)) {}
 
   //虚析构
   ~Logger();
@@ -58,7 +58,7 @@ protected:
  private:
   std::string name_;
   std::atomic<LogLevel> level_;
-  std::vector<LogSinkPtr> sinks_;
+  std::vector<SinkPtr> sinks_;
 };
 
 } // namespace logger

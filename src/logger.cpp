@@ -2,15 +2,15 @@
 
 namespace logger
 {
-Logger::Logger(std::string name, LogSinkPtr sink) : name_{std::move(name)},
+Logger::Logger(std::string name, SinkPtr sink) : name_{std::move(name)},
                                                     level_{LogLevel::kInfo}, 
                                                     sinks_{std::move(sink)}{}
 
 
-Logger::Logger(std::string name, LogSinkPtrInitList sinks):name_{std::move(name)},
+Logger::Logger(std::string name, SinkPtrInitList sinks):name_{std::move(name)},
                                                            level_{LogLevel::kInfo}{
   for(auto& sink : sinks){
-    sinks_.push_back(std::move(sink));
+    sinks_.emplace_back(std::move(sink));
   }
 }
 

@@ -27,10 +27,10 @@ public:
       , thread_pool_(std::move(tp))
       , overflow_policy_(overflow_policy)
   {}
-  AsyncLogger(std::string name, LogSinkPtr sink, std::weak_ptr<ThreadPool> tp,
+  AsyncLogger(std::string name, SinkPtr sink, std::weak_ptr<ThreadPool> tp,
       async_overflow_policy overflow_policy = async_overflow_policy::kBlock);
 
-  AsyncLogger(std::string name, LogSinkPtrInitList sinks, std::weak_ptr<ThreadPool> tp,
+  AsyncLogger(std::string name, SinkPtrInitList sinks, std::weak_ptr<ThreadPool> tp,
       async_overflow_policy overflow_policy = async_overflow_policy::kBlock);
 
   ~AsyncLogger();

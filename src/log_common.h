@@ -6,7 +6,7 @@
 #include <string>
 #include <string_view>
 #include <type_traits>
-
+#include <iostream>
 
 #define LOGGER_LEVEL_TRACE 0
 #define LOGGER_LEVEL_DEBUG 1
