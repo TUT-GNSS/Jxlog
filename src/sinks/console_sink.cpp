@@ -11,7 +11,7 @@ void ConsoleSink::Log(const LogMsg& msg){
 }
 
 void ConsoleSink::SetFormatter(std::unique_ptr<Formatter> formatter){
-   std::cout << "ConsoleSink Log" << "\n"; 
+   std::cout << "ConsoleSink SetFormatter" << "\n"; 
 }
 
 } // namespace logger
