@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <memory>
 
@@ -10,5 +11,6 @@ int main(){
     auto sinkPtr=std::make_shared<logger::ConsoleSink>();
     logger::Logger log("test1",sinkPtr);
     log.Log(logger::LogLevel::kInfo,logger::SourceLocation("test",1,"test.111"),"test");
+
     return 0;
 }

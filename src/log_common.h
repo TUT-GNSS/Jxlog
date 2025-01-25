@@ -7,6 +7,11 @@
 #include <string_view>
 #include <type_traits>
 #include <iostream>
+#include <chrono>
+#include <unordered_map>
+
+#include "internal_log.h"
+
 
 #define LOGGER_LEVEL_TRACE 0
 #define LOGGER_LEVEL_DEBUG 1
@@ -29,7 +34,9 @@ enum class LogLevel{
   kError = LOGGER_LEVEL_ERROR,
   kFatal = LOGGER_LEVEL_CRITICAL,
   kOff = LOGGER_LEVEL_OFF
-};  
+};
+
+
 
 
 struct SourceLocation {

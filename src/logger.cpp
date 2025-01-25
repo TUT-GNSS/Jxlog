@@ -26,6 +26,7 @@ Logger& Logger::operator= (Logger other) noexcept {
   auto other_level = other.level_.load();
   auto my_level = level_.exchange(other_level);
   other.level_.store(my_level);
+  return *this;
 }  
 
 Logger::~Logger(){

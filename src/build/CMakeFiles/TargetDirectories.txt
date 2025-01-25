@@ -1,3 +1,3 @@
-/Users/jixi/Documents/code/JxLog/src/build/CMakeFiles/logger.dir
-/Users/jixi/Documents/code/JxLog/src/build/CMakeFiles/edit_cache.dir
-/Users/jixi/Documents/code/JxLog/src/build/CMakeFiles/rebuild_cache.dir
+/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles/logger.dir
+/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles/edit_cache.dir
+/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles/rebuild_cache.dir
