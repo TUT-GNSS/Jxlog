@@ -225,6 +225,30 @@ test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/test.cpp.s
 .PHONY : test.cpp.s
 
+utils/sys_util_linux.o: utils/sys_util_linux.cpp.o
+.PHONY : utils/sys_util_linux.o
+
+# target to build an object file
+utils/sys_util_linux.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o
+.PHONY : utils/sys_util_linux.cpp.o
+
+utils/sys_util_linux.i: utils/sys_util_linux.cpp.i
+.PHONY : utils/sys_util_linux.i
+
+# target to preprocess a source file
+utils/sys_util_linux.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/utils/sys_util_linux.cpp.i
+.PHONY : utils/sys_util_linux.cpp.i
+
+utils/sys_util_linux.s: utils/sys_util_linux.cpp.s
+.PHONY : utils/sys_util_linux.s
+
+# target to generate assembly for a file
+utils/sys_util_linux.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/utils/sys_util_linux.cpp.s
+.PHONY : utils/sys_util_linux.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -246,6 +270,9 @@ help:
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"
+	@echo "... utils/sys_util_linux.o"
+	@echo "... utils/sys_util_linux.i"
+	@echo "... utils/sys_util_linux.s"
 .PHONY : help
 
 

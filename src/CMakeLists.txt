@@ -17,12 +17,24 @@ set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CAC
 include(${CMAKE_TOOLCHAIN_FILE})
 
 set(FORMATTER_SRCS formatter/default_formatter.cpp)
-set(SINK_SRCS sinks/console_sink.cpp )
 
+# 条件编译
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    set(UTILS_SRCS utils/sys_util_linux.cpp )
+    set(MMAP_SRCS mmap/mmapper.cpp mmap/mmapper_linux.cpp)
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    set(UTILS_SRCS utils/sys_util_linux.cpp )
+    set(MMAP_SRCS mmap/mmapper.cpp mmap/mmapper_linux.cpp)
+else()
+    message(FATAL_ERROR "system unsupported.")
+endif()
+
+set(SINK_SRCS sinks/console_sink.cpp )
 set(SRCS
     logger.cpp
     ${FORMATTER_SRCS}
     ${SINK_SRCS}
+    ${UTILS_SRCS}
 )
 
 

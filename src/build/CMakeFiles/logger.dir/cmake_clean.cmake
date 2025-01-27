@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/logger.dir/sinks/console_sink.cpp.o.d"
   "CMakeFiles/logger.dir/test.cpp.o"
   "CMakeFiles/logger.dir/test.cpp.o.d"
+  "CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o"
+  "CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o.d"
   "logger"
   "logger.pdb"
 )

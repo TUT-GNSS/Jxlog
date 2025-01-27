@@ -4,8 +4,10 @@
 #include "log_msg.h"
 #include "fmt/core.h"
 #include "fmt/chrono.h"
+#include "utils/sys_util.h"
 
 namespace logger{
+namespace formatter{
 
 class Formatter{
 public:
@@ -15,4 +17,6 @@ protected:
   static const std::unordered_map<LogLevel, std::string> kLogLevelMap;
 };
 
+
+}// namespace formatter 
 }// namespace logger

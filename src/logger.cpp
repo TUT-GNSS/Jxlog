@@ -1,4 +1,5 @@
 #include "logger.h"
+#include "sinks/sink.h"
 
 namespace logger
 {

@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/jixi/Documents/code/Jxlog/src/logger.cpp" "CMakeFiles/logger.dir/logger.cpp.o" "gcc" "CMakeFiles/logger.dir/logger.cpp.o.d"
   "/Users/jixi/Documents/code/Jxlog/src/sinks/console_sink.cpp" "CMakeFiles/logger.dir/sinks/console_sink.cpp.o" "gcc" "CMakeFiles/logger.dir/sinks/console_sink.cpp.o.d"
   "/Users/jixi/Documents/code/Jxlog/src/test.cpp" "CMakeFiles/logger.dir/test.cpp.o" "gcc" "CMakeFiles/logger.dir/test.cpp.o.d"
+  "/Users/jixi/Documents/code/Jxlog/src/utils/sys_util_linux.cpp" "CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o" "gcc" "CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

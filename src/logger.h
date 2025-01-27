@@ -11,12 +11,13 @@
 
 #include "log_common.h"
 #include "log_msg.h"
-#include "sinks/sink.h"
 
 namespace logger
 {
-class Sink;//前置声明、pimpl模式
-using SinkPtr = std::shared_ptr<Sink>;
+namespace sink{
+ class Sink;//前置声明、pimpl模式
+}
+using SinkPtr = std::shared_ptr<sink::Sink>;
 using SinkPtrInitList = std::initializer_list<SinkPtr>;
 
 class Logger

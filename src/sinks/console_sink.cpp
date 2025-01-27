@@ -3,8 +3,9 @@
 #include "formatter/default_formatter.h"
 
 namespace logger{
+namespace sink{
 
-ConsoleSink::ConsoleSink() : formatter_(std::make_unique<DefaultFormatter>()) {}
+ConsoleSink::ConsoleSink() : formatter_(std::make_unique<formatter::DefaultFormatter>()) {}
 
 void ConsoleSink::Log(const LogMsg& msg){
   std::cout << "ConsoleSink Log" << "\n";
@@ -13,8 +14,9 @@ void ConsoleSink::Log(const LogMsg& msg){
   fmt::print("format:{}\n",str);
 }
 
-void ConsoleSink::SetFormatter(std::unique_ptr<Formatter> formatter){
+void ConsoleSink::SetFormatter(std::unique_ptr<formatter::Formatter> formatter){
    std::cout << "ConsoleSink SetFormatter" << "\n"; 
 }
 
+} // namespace sink 
 } // namespace logger
