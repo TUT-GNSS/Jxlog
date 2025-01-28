@@ -7,7 +7,8 @@ namespace context
 void ThreadPool::Stop(){
   if(is_available_.load()){
     is_shutdown_.store(true);
-    task_cv_.notify_all();
+    //停止队列阻塞
+    task_queue_.StopWait();
     is_available_.store(false);
   }
   this->worker_threads_.clear();
@@ -33,7 +34,7 @@ void ThreadPool::AddThread(){
     while(!is_shutdown_){
       Task task;
       //从任务队列取出任务
-      if(task_queue_.wait_pop(task, [this]()->bool {return is_shutdown_.load();})){
+      if(task_queue_.WaitPop(task)){
         task();
       }
     }

@@ -16,9 +16,17 @@ set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CAC
 
 include(${CMAKE_TOOLCHAIN_FILE})
 
-set(FORMATTER_SRCS formatter/default_formatter.cpp)
+# 从环境变量中读取 ENABLE_LOG 的值
+set(ENABLE_LOG $ENV{ENABLE_LOG})
+# 根据环境变量的值添加宏定义
+if(ENABLE_LOG)
+    target_compile_definitions(logger PRIVATE ENABLE_LOG)
+endif()
 
-# 条件编译
+set(FORMATTER_SRCS formatter/default_formatter.cpp)
+set(SINK_SRCS sinks/console_sink.cpp )
+set(CONTEXT_SRCS context/thread_pool.cpp)
+# 条件编译 根据系统编译不同文件
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     set(UTILS_SRCS utils/sys_util_linux.cpp )
     set(MMAP_SRCS mmap/mmapper.cpp mmap/mmapper_linux.cpp)
@@ -29,23 +37,16 @@ else()
     message(FATAL_ERROR "system unsupported.")
 endif()
 
-set(SINK_SRCS sinks/console_sink.cpp )
 set(SRCS
     logger.cpp
     ${FORMATTER_SRCS}
     ${SINK_SRCS}
     ${UTILS_SRCS}
+    ${CONTEXT_SRCS}
 )
 
 
 add_executable(logger test.cpp ${SRCS}) # 生成可执行文件，这里程序名即为功能名
-
-# 从环境变量中读取 ENABLE_LOG 的值
-set(ENABLE_LOG $ENV{ENABLE_LOG})
-# 根据环境变量的值添加宏定义
-if(ENABLE_LOG)
-    target_compile_definitions(logger PRIVATE ENABLE_LOG)
-endif()
 
 
 find_package(GTest REQUIRED)

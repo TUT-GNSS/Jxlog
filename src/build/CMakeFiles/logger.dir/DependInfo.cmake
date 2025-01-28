@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/jixi/Documents/code/Jxlog/src/context/thread_pool.cpp" "CMakeFiles/logger.dir/context/thread_pool.cpp.o" "gcc" "CMakeFiles/logger.dir/context/thread_pool.cpp.o.d"
   "/Users/jixi/Documents/code/Jxlog/src/formatter/default_formatter.cpp" "CMakeFiles/logger.dir/formatter/default_formatter.cpp.o" "gcc" "CMakeFiles/logger.dir/formatter/default_formatter.cpp.o.d"
   "/Users/jixi/Documents/code/Jxlog/src/logger.cpp" "CMakeFiles/logger.dir/logger.cpp.o" "gcc" "CMakeFiles/logger.dir/logger.cpp.o.d"
   "/Users/jixi/Documents/code/Jxlog/src/sinks/console_sink.cpp" "CMakeFiles/logger.dir/sinks/console_sink.cpp.o" "gcc" "CMakeFiles/logger.dir/sinks/console_sink.cpp.o.d"

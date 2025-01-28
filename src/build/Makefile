@@ -129,6 +129,30 @@ logger/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/build
 .PHONY : logger/fast
 
+context/thread_pool.o: context/thread_pool.cpp.o
+.PHONY : context/thread_pool.o
+
+# target to build an object file
+context/thread_pool.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/context/thread_pool.cpp.o
+.PHONY : context/thread_pool.cpp.o
+
+context/thread_pool.i: context/thread_pool.cpp.i
+.PHONY : context/thread_pool.i
+
+# target to preprocess a source file
+context/thread_pool.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/context/thread_pool.cpp.i
+.PHONY : context/thread_pool.cpp.i
+
+context/thread_pool.s: context/thread_pool.cpp.s
+.PHONY : context/thread_pool.s
+
+# target to generate assembly for a file
+context/thread_pool.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/context/thread_pool.cpp.s
+.PHONY : context/thread_pool.cpp.s
+
 formatter/default_formatter.o: formatter/default_formatter.cpp.o
 .PHONY : formatter/default_formatter.o
 
@@ -258,6 +282,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... logger"
+	@echo "... context/thread_pool.o"
+	@echo "... context/thread_pool.i"
+	@echo "... context/thread_pool.s"
 	@echo "... formatter/default_formatter.o"
 	@echo "... formatter/default_formatter.i"
 	@echo "... formatter/default_formatter.s"

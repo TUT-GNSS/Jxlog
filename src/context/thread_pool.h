@@ -36,31 +36,28 @@ public:
   //运行无返回值任务
   template<typename T, typename... Args>
   void RunTask(T&& func, Args&&... args){
-    if(is_shutdown_.load() || !is_available_().load){
+    if(is_shutdown_.load() || !is_available_.load()){
       return;
     }
     
     auto task = std::bind(std::forward<T>(func), std::forward<Args>(args)...);
-    task_queue_.push([task](){task();});
-    
-    task_cv_.notify_all();
+    task_queue_.Push([task](){task();});
   }
 
   //运行有返回值任务
   template<typename T, typename... Args>
-  auto RunRetTask(T&& func, Args&&... args) -> std::shared_ptr<std::future<std::invoke_result_t<T(Args...)>>> {
+  auto RunRetTask(T&& func, Args&&... args) -> std::shared_ptr<std::future<std::result_of_t<T(Args...)>>> {
     if(is_shutdown_.load() || !is_available_.load()){
-      return;
+      return nullptr;
     }
     //返回值类型
-    using return_type = std::invoke_result_t<T(Args...)>;
+    using return_type = std::result_of_t<T(Args...)>;
 
     auto task = std::make_shared<std::packaged_task<return_type()>>(std::bind(std::forward<T>(func), std::forward<Args>(args)...));
 
     std::future<return_type> res = task->get_future();
-    task_queue_.push([task](){ (*task)(); });
+    task_queue_.Push([task](){ (*task)(); });
     
-    task_cv_.notify_all();
     return std::make_shared<std::future<return_type>>(std::move(res));
   }
 
@@ -74,7 +71,7 @@ private:
   struct ThreadInfo
   {
     ThreadInfo() = default;
-    ~ThreadInfo() = default;
+    ~ThreadInfo();
   
     ThreadPtr thread_ptr{nullptr};  
   };
@@ -83,9 +80,6 @@ private:
 
   std::vector<ThreadInfoPtr> worker_threads_;    //工作线程
   logger::context::ThreadQueue<Task> task_queue_;//任务队列
-
-  // std::mutex task_mutex_;
-  std::condition_variable task_cv_;
 
   std::atomic<uint32_t> thread_count_;
   std::atomic<bool> is_shutdown_;   // 线程池是否已经关闭
