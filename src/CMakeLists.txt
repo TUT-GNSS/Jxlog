@@ -25,7 +25,7 @@ endif()
 
 set(FORMATTER_SRCS formatter/default_formatter.cpp)
 set(SINK_SRCS sinks/console_sink.cpp )
-set(CONTEXT_SRCS context/thread_pool.cpp)
+set(CONTEXT_SRCS context/executor.cpp context/thread_pool.cpp)
 # 条件编译 根据系统编译不同文件
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     set(UTILS_SRCS utils/sys_util_linux.cpp )
