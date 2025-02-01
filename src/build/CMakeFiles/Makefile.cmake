@@ -21,6 +21,12 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/gtest/GTestTargets-debug.cmake"
   "/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/gtest/GTestTargets-release.cmake"
   "/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/gtest/GTestTargets.cmake"
+  "/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/zlib/vcpkg-cmake-wrapper.cmake"
+  "/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/zstd/zstdConfig.cmake"
+  "/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/zstd/zstdConfigVersion.cmake"
+  "/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/zstd/zstdTargets-debug.cmake"
+  "/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/zstd/zstdTargets-release.cmake"
+  "/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/zstd/zstdTargets.cmake"
   "/Users/jixi/Documents/code/vcpkg/scripts/buildsystems/vcpkg.cmake"
   "/opt/homebrew/share/cmake/Modules/CMakeCCompiler.cmake.in"
   "/opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c"
@@ -118,6 +124,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/opt/homebrew/share/cmake/Modules/FindPackageHandleStandardArgs.cmake"
   "/opt/homebrew/share/cmake/Modules/FindPackageMessage.cmake"
   "/opt/homebrew/share/cmake/Modules/FindThreads.cmake"
+  "/opt/homebrew/share/cmake/Modules/FindZLIB.cmake"
   "/opt/homebrew/share/cmake/Modules/GoogleTest.cmake"
   "/opt/homebrew/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake"
   "/opt/homebrew/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake"
@@ -140,6 +147,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/opt/homebrew/share/cmake/Modules/Platform/Linker/Apple-AppleClang-CXX.cmake"
   "/opt/homebrew/share/cmake/Modules/Platform/Linker/Apple-AppleClang.cmake"
   "/opt/homebrew/share/cmake/Modules/Platform/UnixPaths.cmake"
+  "/opt/homebrew/share/cmake/Modules/SelectLibraryConfigurations.cmake"
   )
 
 # The corresponding makefile is:

@@ -129,6 +129,54 @@ logger/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/build
 .PHONY : logger/fast
 
+compress/zlib_compress.o: compress/zlib_compress.cpp.o
+.PHONY : compress/zlib_compress.o
+
+# target to build an object file
+compress/zlib_compress.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/compress/zlib_compress.cpp.o
+.PHONY : compress/zlib_compress.cpp.o
+
+compress/zlib_compress.i: compress/zlib_compress.cpp.i
+.PHONY : compress/zlib_compress.i
+
+# target to preprocess a source file
+compress/zlib_compress.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/compress/zlib_compress.cpp.i
+.PHONY : compress/zlib_compress.cpp.i
+
+compress/zlib_compress.s: compress/zlib_compress.cpp.s
+.PHONY : compress/zlib_compress.s
+
+# target to generate assembly for a file
+compress/zlib_compress.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/compress/zlib_compress.cpp.s
+.PHONY : compress/zlib_compress.cpp.s
+
+compress/zstd_compress.o: compress/zstd_compress.cpp.o
+.PHONY : compress/zstd_compress.o
+
+# target to build an object file
+compress/zstd_compress.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/compress/zstd_compress.cpp.o
+.PHONY : compress/zstd_compress.cpp.o
+
+compress/zstd_compress.i: compress/zstd_compress.cpp.i
+.PHONY : compress/zstd_compress.i
+
+# target to preprocess a source file
+compress/zstd_compress.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/compress/zstd_compress.cpp.i
+.PHONY : compress/zstd_compress.cpp.i
+
+compress/zstd_compress.s: compress/zstd_compress.cpp.s
+.PHONY : compress/zstd_compress.s
+
+# target to generate assembly for a file
+compress/zstd_compress.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/compress/zstd_compress.cpp.s
+.PHONY : compress/zstd_compress.cpp.s
+
 context/context.o: context/context.cpp.o
 .PHONY : context/context.o
 
@@ -330,6 +378,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... logger"
+	@echo "... compress/zlib_compress.o"
+	@echo "... compress/zlib_compress.i"
+	@echo "... compress/zlib_compress.s"
+	@echo "... compress/zstd_compress.o"
+	@echo "... compress/zstd_compress.i"
+	@echo "... compress/zstd_compress.s"
 	@echo "... context/context.o"
 	@echo "... context/context.i"
 	@echo "... context/context.s"

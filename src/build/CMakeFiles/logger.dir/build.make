@@ -184,6 +184,34 @@ CMakeFiles/logger.dir/context/thread_pool.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/logger.dir/context/thread_pool.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jixi/Documents/code/Jxlog/src/context/thread_pool.cpp -o CMakeFiles/logger.dir/context/thread_pool.cpp.s
 
+CMakeFiles/logger.dir/compress/zlib_compress.cpp.o: CMakeFiles/logger.dir/flags.make
+CMakeFiles/logger.dir/compress/zlib_compress.cpp.o: /Users/jixi/Documents/code/Jxlog/src/compress/zlib_compress.cpp
+CMakeFiles/logger.dir/compress/zlib_compress.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/logger.dir/compress/zlib_compress.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/compress/zlib_compress.cpp.o -MF CMakeFiles/logger.dir/compress/zlib_compress.cpp.o.d -o CMakeFiles/logger.dir/compress/zlib_compress.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/compress/zlib_compress.cpp
+
+CMakeFiles/logger.dir/compress/zlib_compress.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/logger.dir/compress/zlib_compress.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jixi/Documents/code/Jxlog/src/compress/zlib_compress.cpp > CMakeFiles/logger.dir/compress/zlib_compress.cpp.i
+
+CMakeFiles/logger.dir/compress/zlib_compress.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/logger.dir/compress/zlib_compress.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jixi/Documents/code/Jxlog/src/compress/zlib_compress.cpp -o CMakeFiles/logger.dir/compress/zlib_compress.cpp.s
+
+CMakeFiles/logger.dir/compress/zstd_compress.cpp.o: CMakeFiles/logger.dir/flags.make
+CMakeFiles/logger.dir/compress/zstd_compress.cpp.o: /Users/jixi/Documents/code/Jxlog/src/compress/zstd_compress.cpp
+CMakeFiles/logger.dir/compress/zstd_compress.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/logger.dir/compress/zstd_compress.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/compress/zstd_compress.cpp.o -MF CMakeFiles/logger.dir/compress/zstd_compress.cpp.o.d -o CMakeFiles/logger.dir/compress/zstd_compress.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/compress/zstd_compress.cpp
+
+CMakeFiles/logger.dir/compress/zstd_compress.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/logger.dir/compress/zstd_compress.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jixi/Documents/code/Jxlog/src/compress/zstd_compress.cpp > CMakeFiles/logger.dir/compress/zstd_compress.cpp.i
+
+CMakeFiles/logger.dir/compress/zstd_compress.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/logger.dir/compress/zstd_compress.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jixi/Documents/code/Jxlog/src/compress/zstd_compress.cpp -o CMakeFiles/logger.dir/compress/zstd_compress.cpp.s
+
 # Object files for target logger
 logger_OBJECTS = \
 "CMakeFiles/logger.dir/test.cpp.o" \
@@ -193,7 +221,9 @@ logger_OBJECTS = \
 "CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o" \
 "CMakeFiles/logger.dir/context/context.cpp.o" \
 "CMakeFiles/logger.dir/context/executor.cpp.o" \
-"CMakeFiles/logger.dir/context/thread_pool.cpp.o"
+"CMakeFiles/logger.dir/context/thread_pool.cpp.o" \
+"CMakeFiles/logger.dir/compress/zlib_compress.cpp.o" \
+"CMakeFiles/logger.dir/compress/zstd_compress.cpp.o"
 
 # External object files for target logger
 logger_EXTERNAL_OBJECTS =
@@ -206,16 +236,20 @@ logger: CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o
 logger: CMakeFiles/logger.dir/context/context.cpp.o
 logger: CMakeFiles/logger.dir/context/executor.cpp.o
 logger: CMakeFiles/logger.dir/context/thread_pool.cpp.o
+logger: CMakeFiles/logger.dir/compress/zlib_compress.cpp.o
+logger: CMakeFiles/logger.dir/compress/zstd_compress.cpp.o
 logger: CMakeFiles/logger.dir/build.make
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libgtest.a
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/manual-link/libgtest_main.a
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libgmock.a
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/manual-link/libgmock_main.a
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libfmtd.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/lib/libz.a
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libgmock.a
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libgtest.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libzstd.a
 logger: CMakeFiles/logger.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable logger"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable logger"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/logger.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

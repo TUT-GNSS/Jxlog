@@ -917,4 +917,17 @@ CMakeFiles/logger.dir/test.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/queue \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/deque \
   /Users/jixi/Documents/code/JxLog/src/context/thread_pool.h \
-  /Users/jixi/Documents/code/JxLog/src/context/thread_queue.h
+  /Users/jixi/Documents/code/JxLog/src/context/thread_queue.h \
+  /Users/jixi/Documents/code/JxLog/src/compress/zlib_compress.h \
+  /Users/jixi/Documents/code/JxLog/src/compress/compress.h \
+  /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/include/zlib.h \
+  /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/include/zconf.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/unistd.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/unistd.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_posix_vdisable.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/select.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_select.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_uuid_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/gethostuuid.h \
+  /Users/jixi/Documents/code/JxLog/src/compress/zstd_compress.h \
+  /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/include/zstd.h

@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/logger.dir/compress/zlib_compress.cpp.o"
+  "CMakeFiles/logger.dir/compress/zlib_compress.cpp.o.d"
+  "CMakeFiles/logger.dir/compress/zstd_compress.cpp.o"
+  "CMakeFiles/logger.dir/compress/zstd_compress.cpp.o.d"
   "CMakeFiles/logger.dir/context/context.cpp.o"
   "CMakeFiles/logger.dir/context/context.cpp.o.d"
   "CMakeFiles/logger.dir/context/executor.cpp.o"

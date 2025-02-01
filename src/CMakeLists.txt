@@ -26,6 +26,7 @@ endif()
 set(FORMATTER_SRCS formatter/default_formatter.cpp)
 set(SINK_SRCS sinks/console_sink.cpp )
 set(CONTEXT_SRCS context/context.cpp context/executor.cpp context/thread_pool.cpp)
+set(COMPRESS_SRCS compress/zlib_compress.cpp compress/zstd_compress.cpp)
 # 条件编译 根据系统编译不同文件
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     set(UTILS_SRCS utils/sys_util_linux.cpp )
@@ -43,6 +44,7 @@ set(SRCS
     ${SINK_SRCS}
     ${UTILS_SRCS}
     ${CONTEXT_SRCS}
+    ${COMPRESS_SRCS}
 )
 
 
@@ -55,3 +57,8 @@ target_link_libraries(logger PRIVATE GTest::gtest GTest::gtest_main GTest::gmock
 find_package(fmt CONFIG REQUIRED)
 target_link_libraries(logger PRIVATE fmt::fmt)
 
+find_package(ZLIB REQUIRED)
+target_link_libraries(logger PRIVATE ZLIB::ZLIB)
+
+find_package(zstd CONFIG REQUIRED)
+target_link_libraries(logger PRIVATE zstd::libzstd)
