@@ -8,7 +8,7 @@ namespace context
 Executor::ExecutorTimer::ExecutorTimer(){
   thread_pool_ = std::make_unique<logger::context::ThreadPool>(1);
   repeated_task_id_.store(0);
-  running_.store(true);
+  running_.store(false);
 }
 
 Executor::ExecutorTimer::~ExecutorTimer(){
@@ -36,7 +36,7 @@ void Executor::ExecutorTimer::Run_(){
   while (running_.load())
   {
     std::unique_lock<std::mutex> lk(mtx_);
-    cond_cv_.wait(lk,[this](){return p_queue_.empty();});
+    cond_cv_.wait(lk,[this](){return !p_queue_.empty();});
     InternalS s = p_queue_.top();
     // 当前时间与任务执行时间的差 
     auto diff = s.time_point_ - std::chrono::high_resolution_clock::now();
@@ -53,7 +53,7 @@ void Executor::ExecutorTimer::Run_(){
   }
 }
 
-void Executor::ExecutorTimer::PostDelayTask(Task task, const std::chrono::microseconds& delay_time){
+void Executor::ExecutorTimer::PostDelayedTask(Task task, const std::chrono::microseconds& delay_time){
   auto time_point = std::chrono::high_resolution_clock::now() + delay_time;
   {
     std::lock_guard<std::mutex> lk(mtx_);
@@ -95,7 +95,7 @@ void Executor::ExecutorTimer::PostRepeatedTask_(Task task, const std::chrono::mi
     std::lock_guard<std::mutex> lk(mtx_);
     p_queue_.emplace(std::move(func),time_point_,repeated_task_id);
   }
-  cond_cv_.notify_all();
+ cond_cv_.notify_all();
 }
 TaskRunnerTag Executor::ExecutorContext::AddTaskRunner(const TaskRunnerTag& tag){
   std::lock_guard<std::mutex> lock(mtx_);

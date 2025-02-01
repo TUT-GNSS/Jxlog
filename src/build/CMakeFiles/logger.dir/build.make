@@ -142,10 +142,24 @@ CMakeFiles/logger.dir/utils/sys_util_linux.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/logger.dir/utils/sys_util_linux.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jixi/Documents/code/Jxlog/src/utils/sys_util_linux.cpp -o CMakeFiles/logger.dir/utils/sys_util_linux.cpp.s
 
+CMakeFiles/logger.dir/context/context.cpp.o: CMakeFiles/logger.dir/flags.make
+CMakeFiles/logger.dir/context/context.cpp.o: /Users/jixi/Documents/code/Jxlog/src/context/context.cpp
+CMakeFiles/logger.dir/context/context.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/logger.dir/context/context.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/context/context.cpp.o -MF CMakeFiles/logger.dir/context/context.cpp.o.d -o CMakeFiles/logger.dir/context/context.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/context/context.cpp
+
+CMakeFiles/logger.dir/context/context.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/logger.dir/context/context.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jixi/Documents/code/Jxlog/src/context/context.cpp > CMakeFiles/logger.dir/context/context.cpp.i
+
+CMakeFiles/logger.dir/context/context.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/logger.dir/context/context.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jixi/Documents/code/Jxlog/src/context/context.cpp -o CMakeFiles/logger.dir/context/context.cpp.s
+
 CMakeFiles/logger.dir/context/executor.cpp.o: CMakeFiles/logger.dir/flags.make
 CMakeFiles/logger.dir/context/executor.cpp.o: /Users/jixi/Documents/code/Jxlog/src/context/executor.cpp
 CMakeFiles/logger.dir/context/executor.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/logger.dir/context/executor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/logger.dir/context/executor.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/context/executor.cpp.o -MF CMakeFiles/logger.dir/context/executor.cpp.o.d -o CMakeFiles/logger.dir/context/executor.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/context/executor.cpp
 
 CMakeFiles/logger.dir/context/executor.cpp.i: cmake_force
@@ -159,7 +173,7 @@ CMakeFiles/logger.dir/context/executor.cpp.s: cmake_force
 CMakeFiles/logger.dir/context/thread_pool.cpp.o: CMakeFiles/logger.dir/flags.make
 CMakeFiles/logger.dir/context/thread_pool.cpp.o: /Users/jixi/Documents/code/Jxlog/src/context/thread_pool.cpp
 CMakeFiles/logger.dir/context/thread_pool.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/logger.dir/context/thread_pool.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/logger.dir/context/thread_pool.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/context/thread_pool.cpp.o -MF CMakeFiles/logger.dir/context/thread_pool.cpp.o.d -o CMakeFiles/logger.dir/context/thread_pool.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/context/thread_pool.cpp
 
 CMakeFiles/logger.dir/context/thread_pool.cpp.i: cmake_force
@@ -177,6 +191,7 @@ logger_OBJECTS = \
 "CMakeFiles/logger.dir/formatter/default_formatter.cpp.o" \
 "CMakeFiles/logger.dir/sinks/console_sink.cpp.o" \
 "CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o" \
+"CMakeFiles/logger.dir/context/context.cpp.o" \
 "CMakeFiles/logger.dir/context/executor.cpp.o" \
 "CMakeFiles/logger.dir/context/thread_pool.cpp.o"
 
@@ -188,6 +203,7 @@ logger: CMakeFiles/logger.dir/logger.cpp.o
 logger: CMakeFiles/logger.dir/formatter/default_formatter.cpp.o
 logger: CMakeFiles/logger.dir/sinks/console_sink.cpp.o
 logger: CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o
+logger: CMakeFiles/logger.dir/context/context.cpp.o
 logger: CMakeFiles/logger.dir/context/executor.cpp.o
 logger: CMakeFiles/logger.dir/context/thread_pool.cpp.o
 logger: CMakeFiles/logger.dir/build.make
@@ -199,7 +215,7 @@ logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libfmtd.a
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libgmock.a
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libgtest.a
 logger: CMakeFiles/logger.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable logger"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable logger"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/logger.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

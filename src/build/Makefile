@@ -129,6 +129,30 @@ logger/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/build
 .PHONY : logger/fast
 
+context/context.o: context/context.cpp.o
+.PHONY : context/context.o
+
+# target to build an object file
+context/context.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/context/context.cpp.o
+.PHONY : context/context.cpp.o
+
+context/context.i: context/context.cpp.i
+.PHONY : context/context.i
+
+# target to preprocess a source file
+context/context.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/context/context.cpp.i
+.PHONY : context/context.cpp.i
+
+context/context.s: context/context.cpp.s
+.PHONY : context/context.s
+
+# target to generate assembly for a file
+context/context.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/context/context.cpp.s
+.PHONY : context/context.cpp.s
+
 context/executor.o: context/executor.cpp.o
 .PHONY : context/executor.o
 
@@ -306,6 +330,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... logger"
+	@echo "... context/context.o"
+	@echo "... context/context.i"
+	@echo "... context/context.s"
 	@echo "... context/executor.o"
 	@echo "... context/executor.i"
 	@echo "... context/executor.s"

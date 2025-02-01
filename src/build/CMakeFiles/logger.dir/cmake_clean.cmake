@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/logger.dir/context/context.cpp.o"
+  "CMakeFiles/logger.dir/context/context.cpp.o.d"
   "CMakeFiles/logger.dir/context/executor.cpp.o"
   "CMakeFiles/logger.dir/context/executor.cpp.o.d"
   "CMakeFiles/logger.dir/context/thread_pool.cpp.o"

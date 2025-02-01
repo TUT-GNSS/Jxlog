@@ -60,7 +60,7 @@ class Executor{
     bool Start();
     void Stop();
 
-    void PostDelayTask(Task task, const std::chrono::microseconds& delay_time);
+    void PostDelayedTask(Task task, const std::chrono::microseconds& delay_time);
 
     RepeatedTaskId PostRepeatedTask(Task task, const std::chrono::microseconds& delay_time,
                                     RepeatedTaskNum repeated_num);
@@ -69,7 +69,7 @@ class Executor{
 
   private:
     void Run_();
-
+    // 封装一层 供PostRepeatedTask_ bind  封装后方便拓展
     void PostTask_(Task task, std::chrono::microseconds delay_time,
                            RepeatedTaskId repeated_task_id,RepeatedTaskNum repeated_task_num); 
 
@@ -125,6 +125,39 @@ public:
 
   void PostTask(const TaskRunnerTag& runner_tag, Task task);
 
+
+  template <typename R, typename P>
+  void PostDelayedTask(const TaskRunnerTag& runner_tag, Task task, const std::chrono::duration<R, P>& delta) {
+    //将对应线程池执行task任务 封装为一个func
+    Task func = std::bind(&Executor::PostTask, this, runner_tag, std::move(task));
+
+    executor_timer_->Start();
+    executor_timer_->PostDelayedTask(std::move(func), std::chrono::duration_cast<std::chrono::microseconds>(delta));
+  }
+
+  template <typename R, typename P>
+  RepeatedTaskId PostRepeatedTask(const TaskRunnerTag& runner_tag,
+                                  Task task,
+                                  const std::chrono::duration<R, P>& delta,
+                                  uint64_t repeat_num) {
+    Task func = std::bind(&Executor::PostTask, this, runner_tag, std::move(task));
+
+    executor_timer_->Start();
+
+    return executor_timer_->PostRepeatedTask(std::move(func),
+                                             std::chrono::duration_cast<std::chrono::microseconds>(delta), repeat_num);
+  }
+
+  void CancelRepeatedTask(RepeatedTaskId task_id) { executor_timer_->CancelRepeatedTask(task_id); }
+
+  template <typename T, typename... Args>
+  auto PostTaskAndGetResult(const TaskRunnerTag& runner_tag,
+                            T&& func,
+                            Args&&... args) -> std::shared_ptr<std::future<std::result_of_t<T(Args...)>>> {
+    ExecutorContext::TaskRunner* task_runner = executor_context_->GetTaskRunner(runner_tag);
+    auto result = task_runner->RunRetTask(std::forward<T>(func), std::forward<Args>(args)...);
+    return result;
+  }
 private:
   std::unique_ptr<ExecutorContext> executor_context_;
   std::unique_ptr<ExecutorTimer> executor_timer_;
