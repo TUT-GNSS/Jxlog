@@ -100,10 +100,38 @@ CMakeFiles/logger.dir/logger.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/logger.dir/logger.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jixi/Documents/code/Jxlog/src/logger.cpp -o CMakeFiles/logger.dir/logger.cpp.s
 
+CMakeFiles/logger.dir/formatter/formatter.cpp.o: CMakeFiles/logger.dir/flags.make
+CMakeFiles/logger.dir/formatter/formatter.cpp.o: /Users/jixi/Documents/code/Jxlog/src/formatter/formatter.cpp
+CMakeFiles/logger.dir/formatter/formatter.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/logger.dir/formatter/formatter.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/formatter/formatter.cpp.o -MF CMakeFiles/logger.dir/formatter/formatter.cpp.o.d -o CMakeFiles/logger.dir/formatter/formatter.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/formatter/formatter.cpp
+
+CMakeFiles/logger.dir/formatter/formatter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/logger.dir/formatter/formatter.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jixi/Documents/code/Jxlog/src/formatter/formatter.cpp > CMakeFiles/logger.dir/formatter/formatter.cpp.i
+
+CMakeFiles/logger.dir/formatter/formatter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/logger.dir/formatter/formatter.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jixi/Documents/code/Jxlog/src/formatter/formatter.cpp -o CMakeFiles/logger.dir/formatter/formatter.cpp.s
+
+CMakeFiles/logger.dir/formatter/effective_formatter.cpp.o: CMakeFiles/logger.dir/flags.make
+CMakeFiles/logger.dir/formatter/effective_formatter.cpp.o: /Users/jixi/Documents/code/Jxlog/src/formatter/effective_formatter.cpp
+CMakeFiles/logger.dir/formatter/effective_formatter.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/logger.dir/formatter/effective_formatter.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/formatter/effective_formatter.cpp.o -MF CMakeFiles/logger.dir/formatter/effective_formatter.cpp.o.d -o CMakeFiles/logger.dir/formatter/effective_formatter.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/formatter/effective_formatter.cpp
+
+CMakeFiles/logger.dir/formatter/effective_formatter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/logger.dir/formatter/effective_formatter.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jixi/Documents/code/Jxlog/src/formatter/effective_formatter.cpp > CMakeFiles/logger.dir/formatter/effective_formatter.cpp.i
+
+CMakeFiles/logger.dir/formatter/effective_formatter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/logger.dir/formatter/effective_formatter.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jixi/Documents/code/Jxlog/src/formatter/effective_formatter.cpp -o CMakeFiles/logger.dir/formatter/effective_formatter.cpp.s
+
 CMakeFiles/logger.dir/formatter/default_formatter.cpp.o: CMakeFiles/logger.dir/flags.make
 CMakeFiles/logger.dir/formatter/default_formatter.cpp.o: /Users/jixi/Documents/code/Jxlog/src/formatter/default_formatter.cpp
 CMakeFiles/logger.dir/formatter/default_formatter.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/logger.dir/formatter/default_formatter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/logger.dir/formatter/default_formatter.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/formatter/default_formatter.cpp.o -MF CMakeFiles/logger.dir/formatter/default_formatter.cpp.o.d -o CMakeFiles/logger.dir/formatter/default_formatter.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/formatter/default_formatter.cpp
 
 CMakeFiles/logger.dir/formatter/default_formatter.cpp.i: cmake_force
@@ -117,7 +145,7 @@ CMakeFiles/logger.dir/formatter/default_formatter.cpp.s: cmake_force
 CMakeFiles/logger.dir/sinks/console_sink.cpp.o: CMakeFiles/logger.dir/flags.make
 CMakeFiles/logger.dir/sinks/console_sink.cpp.o: /Users/jixi/Documents/code/Jxlog/src/sinks/console_sink.cpp
 CMakeFiles/logger.dir/sinks/console_sink.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/logger.dir/sinks/console_sink.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/logger.dir/sinks/console_sink.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/sinks/console_sink.cpp.o -MF CMakeFiles/logger.dir/sinks/console_sink.cpp.o.d -o CMakeFiles/logger.dir/sinks/console_sink.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/sinks/console_sink.cpp
 
 CMakeFiles/logger.dir/sinks/console_sink.cpp.i: cmake_force
@@ -131,7 +159,7 @@ CMakeFiles/logger.dir/sinks/console_sink.cpp.s: cmake_force
 CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o: CMakeFiles/logger.dir/flags.make
 CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o: /Users/jixi/Documents/code/Jxlog/src/utils/sys_util_linux.cpp
 CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o -MF CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o.d -o CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/utils/sys_util_linux.cpp
 
 CMakeFiles/logger.dir/utils/sys_util_linux.cpp.i: cmake_force
@@ -145,7 +173,7 @@ CMakeFiles/logger.dir/utils/sys_util_linux.cpp.s: cmake_force
 CMakeFiles/logger.dir/context/context.cpp.o: CMakeFiles/logger.dir/flags.make
 CMakeFiles/logger.dir/context/context.cpp.o: /Users/jixi/Documents/code/Jxlog/src/context/context.cpp
 CMakeFiles/logger.dir/context/context.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/logger.dir/context/context.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/logger.dir/context/context.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/context/context.cpp.o -MF CMakeFiles/logger.dir/context/context.cpp.o.d -o CMakeFiles/logger.dir/context/context.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/context/context.cpp
 
 CMakeFiles/logger.dir/context/context.cpp.i: cmake_force
@@ -159,7 +187,7 @@ CMakeFiles/logger.dir/context/context.cpp.s: cmake_force
 CMakeFiles/logger.dir/context/executor.cpp.o: CMakeFiles/logger.dir/flags.make
 CMakeFiles/logger.dir/context/executor.cpp.o: /Users/jixi/Documents/code/Jxlog/src/context/executor.cpp
 CMakeFiles/logger.dir/context/executor.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/logger.dir/context/executor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/logger.dir/context/executor.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/context/executor.cpp.o -MF CMakeFiles/logger.dir/context/executor.cpp.o.d -o CMakeFiles/logger.dir/context/executor.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/context/executor.cpp
 
 CMakeFiles/logger.dir/context/executor.cpp.i: cmake_force
@@ -173,7 +201,7 @@ CMakeFiles/logger.dir/context/executor.cpp.s: cmake_force
 CMakeFiles/logger.dir/context/thread_pool.cpp.o: CMakeFiles/logger.dir/flags.make
 CMakeFiles/logger.dir/context/thread_pool.cpp.o: /Users/jixi/Documents/code/Jxlog/src/context/thread_pool.cpp
 CMakeFiles/logger.dir/context/thread_pool.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/logger.dir/context/thread_pool.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/logger.dir/context/thread_pool.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/context/thread_pool.cpp.o -MF CMakeFiles/logger.dir/context/thread_pool.cpp.o.d -o CMakeFiles/logger.dir/context/thread_pool.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/context/thread_pool.cpp
 
 CMakeFiles/logger.dir/context/thread_pool.cpp.i: cmake_force
@@ -187,7 +215,7 @@ CMakeFiles/logger.dir/context/thread_pool.cpp.s: cmake_force
 CMakeFiles/logger.dir/compress/zlib_compress.cpp.o: CMakeFiles/logger.dir/flags.make
 CMakeFiles/logger.dir/compress/zlib_compress.cpp.o: /Users/jixi/Documents/code/Jxlog/src/compress/zlib_compress.cpp
 CMakeFiles/logger.dir/compress/zlib_compress.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/logger.dir/compress/zlib_compress.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/logger.dir/compress/zlib_compress.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/compress/zlib_compress.cpp.o -MF CMakeFiles/logger.dir/compress/zlib_compress.cpp.o.d -o CMakeFiles/logger.dir/compress/zlib_compress.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/compress/zlib_compress.cpp
 
 CMakeFiles/logger.dir/compress/zlib_compress.cpp.i: cmake_force
@@ -201,7 +229,7 @@ CMakeFiles/logger.dir/compress/zlib_compress.cpp.s: cmake_force
 CMakeFiles/logger.dir/compress/zstd_compress.cpp.o: CMakeFiles/logger.dir/flags.make
 CMakeFiles/logger.dir/compress/zstd_compress.cpp.o: /Users/jixi/Documents/code/Jxlog/src/compress/zstd_compress.cpp
 CMakeFiles/logger.dir/compress/zstd_compress.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/logger.dir/compress/zstd_compress.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/logger.dir/compress/zstd_compress.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/compress/zstd_compress.cpp.o -MF CMakeFiles/logger.dir/compress/zstd_compress.cpp.o.d -o CMakeFiles/logger.dir/compress/zstd_compress.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/compress/zstd_compress.cpp
 
 CMakeFiles/logger.dir/compress/zstd_compress.cpp.i: cmake_force
@@ -212,10 +240,54 @@ CMakeFiles/logger.dir/compress/zstd_compress.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/logger.dir/compress/zstd_compress.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jixi/Documents/code/Jxlog/src/compress/zstd_compress.cpp -o CMakeFiles/logger.dir/compress/zstd_compress.cpp.s
 
+CMakeFiles/logger.dir/crypt/aes_crypt.cpp.o: CMakeFiles/logger.dir/flags.make
+CMakeFiles/logger.dir/crypt/aes_crypt.cpp.o: /Users/jixi/Documents/code/Jxlog/src/crypt/aes_crypt.cpp
+CMakeFiles/logger.dir/crypt/aes_crypt.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/logger.dir/crypt/aes_crypt.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/crypt/aes_crypt.cpp.o -MF CMakeFiles/logger.dir/crypt/aes_crypt.cpp.o.d -o CMakeFiles/logger.dir/crypt/aes_crypt.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/crypt/aes_crypt.cpp
+
+CMakeFiles/logger.dir/crypt/aes_crypt.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/logger.dir/crypt/aes_crypt.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jixi/Documents/code/Jxlog/src/crypt/aes_crypt.cpp > CMakeFiles/logger.dir/crypt/aes_crypt.cpp.i
+
+CMakeFiles/logger.dir/crypt/aes_crypt.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/logger.dir/crypt/aes_crypt.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jixi/Documents/code/Jxlog/src/crypt/aes_crypt.cpp -o CMakeFiles/logger.dir/crypt/aes_crypt.cpp.s
+
+CMakeFiles/logger.dir/crypt/crypt.cpp.o: CMakeFiles/logger.dir/flags.make
+CMakeFiles/logger.dir/crypt/crypt.cpp.o: /Users/jixi/Documents/code/Jxlog/src/crypt/crypt.cpp
+CMakeFiles/logger.dir/crypt/crypt.cpp.o: CMakeFiles/logger.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/logger.dir/crypt/crypt.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/crypt/crypt.cpp.o -MF CMakeFiles/logger.dir/crypt/crypt.cpp.o.d -o CMakeFiles/logger.dir/crypt/crypt.cpp.o -c /Users/jixi/Documents/code/Jxlog/src/crypt/crypt.cpp
+
+CMakeFiles/logger.dir/crypt/crypt.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/logger.dir/crypt/crypt.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jixi/Documents/code/Jxlog/src/crypt/crypt.cpp > CMakeFiles/logger.dir/crypt/crypt.cpp.i
+
+CMakeFiles/logger.dir/crypt/crypt.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/logger.dir/crypt/crypt.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jixi/Documents/code/Jxlog/src/crypt/crypt.cpp -o CMakeFiles/logger.dir/crypt/crypt.cpp.s
+
+CMakeFiles/logger.dir/proto/effective_msg.pb.cc.o: CMakeFiles/logger.dir/flags.make
+CMakeFiles/logger.dir/proto/effective_msg.pb.cc.o: /Users/jixi/Documents/code/Jxlog/src/proto/effective_msg.pb.cc
+CMakeFiles/logger.dir/proto/effective_msg.pb.cc.o: CMakeFiles/logger.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/logger.dir/proto/effective_msg.pb.cc.o"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/logger.dir/proto/effective_msg.pb.cc.o -MF CMakeFiles/logger.dir/proto/effective_msg.pb.cc.o.d -o CMakeFiles/logger.dir/proto/effective_msg.pb.cc.o -c /Users/jixi/Documents/code/Jxlog/src/proto/effective_msg.pb.cc
+
+CMakeFiles/logger.dir/proto/effective_msg.pb.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/logger.dir/proto/effective_msg.pb.cc.i"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jixi/Documents/code/Jxlog/src/proto/effective_msg.pb.cc > CMakeFiles/logger.dir/proto/effective_msg.pb.cc.i
+
+CMakeFiles/logger.dir/proto/effective_msg.pb.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/logger.dir/proto/effective_msg.pb.cc.s"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jixi/Documents/code/Jxlog/src/proto/effective_msg.pb.cc -o CMakeFiles/logger.dir/proto/effective_msg.pb.cc.s
+
 # Object files for target logger
 logger_OBJECTS = \
 "CMakeFiles/logger.dir/test.cpp.o" \
 "CMakeFiles/logger.dir/logger.cpp.o" \
+"CMakeFiles/logger.dir/formatter/formatter.cpp.o" \
+"CMakeFiles/logger.dir/formatter/effective_formatter.cpp.o" \
 "CMakeFiles/logger.dir/formatter/default_formatter.cpp.o" \
 "CMakeFiles/logger.dir/sinks/console_sink.cpp.o" \
 "CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o" \
@@ -223,13 +295,18 @@ logger_OBJECTS = \
 "CMakeFiles/logger.dir/context/executor.cpp.o" \
 "CMakeFiles/logger.dir/context/thread_pool.cpp.o" \
 "CMakeFiles/logger.dir/compress/zlib_compress.cpp.o" \
-"CMakeFiles/logger.dir/compress/zstd_compress.cpp.o"
+"CMakeFiles/logger.dir/compress/zstd_compress.cpp.o" \
+"CMakeFiles/logger.dir/crypt/aes_crypt.cpp.o" \
+"CMakeFiles/logger.dir/crypt/crypt.cpp.o" \
+"CMakeFiles/logger.dir/proto/effective_msg.pb.cc.o"
 
 # External object files for target logger
 logger_EXTERNAL_OBJECTS =
 
 logger: CMakeFiles/logger.dir/test.cpp.o
 logger: CMakeFiles/logger.dir/logger.cpp.o
+logger: CMakeFiles/logger.dir/formatter/formatter.cpp.o
+logger: CMakeFiles/logger.dir/formatter/effective_formatter.cpp.o
 logger: CMakeFiles/logger.dir/formatter/default_formatter.cpp.o
 logger: CMakeFiles/logger.dir/sinks/console_sink.cpp.o
 logger: CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o
@@ -238,6 +315,9 @@ logger: CMakeFiles/logger.dir/context/executor.cpp.o
 logger: CMakeFiles/logger.dir/context/thread_pool.cpp.o
 logger: CMakeFiles/logger.dir/compress/zlib_compress.cpp.o
 logger: CMakeFiles/logger.dir/compress/zstd_compress.cpp.o
+logger: CMakeFiles/logger.dir/crypt/aes_crypt.cpp.o
+logger: CMakeFiles/logger.dir/crypt/crypt.cpp.o
+logger: CMakeFiles/logger.dir/proto/effective_msg.pb.cc.o
 logger: CMakeFiles/logger.dir/build.make
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libgtest.a
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/manual-link/libgtest_main.a
@@ -245,11 +325,97 @@ logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libgmock.
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/manual-link/libgmock_main.a
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libfmtd.a
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/lib/libz.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libssl.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libcrypto.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libcryptopp.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libprotocd.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libprotobufd.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libprotobuf-lited.a
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libgmock.a
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libgtest.a
 logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libzstd.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_log_internal_check_op.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_leak_check.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_die_if_null.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_log_internal_conditions.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_log_internal_message.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_log_internal_nullguard.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_examine_stack.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_log_internal_format.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_log_internal_proto.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_log_internal_log_sink_set.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_log_sink.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_log_entry.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_flags_internal.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_flags_marshalling.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_flags_reflection.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_flags_config.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_flags_program_name.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_flags_private_handle_accessor.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_flags_commandlineflag.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_flags_commandlineflag_internal.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_log_initialize.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_log_internal_globals.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_log_globals.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_vlog_config_internal.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_log_internal_fnmatch.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_raw_hash_set.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_hash.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_city.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_low_level_hash.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_hashtablez_sampler.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_random_distributions.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_random_seed_sequences.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_random_internal_pool_urbg.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_random_internal_randen.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_random_internal_randen_hwaes.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_random_internal_randen_hwaes_impl.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_random_internal_randen_slow.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_random_internal_platform.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_random_internal_seed_material.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_random_seed_gen_exception.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_statusor.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_status.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_cord.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_cordz_info.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_cord_internal.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_cordz_functions.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_exponential_biased.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_cordz_handle.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_crc_cord_state.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_crc32c.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_crc_internal.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_crc_cpu_detect.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_bad_optional_access.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_strerror.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_str_format_internal.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_synchronization.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_stacktrace.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_symbolize.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_debugging_internal.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_demangle_internal.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_demangle_rust.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_decode_rust_punycode.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_utf8_for_code_point.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_graphcycles_internal.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_kernel_timeout_internal.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_malloc_internal.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_time.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_civil_time.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_time_zone.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_bad_variant_access.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libutf8_validity.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_strings.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_int128.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_strings_internal.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_string_view.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_base.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_spinlock_wait.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_throw_delegate.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_raw_logging_internal.a
+logger: /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libabsl_log_severity.a
 logger: CMakeFiles/logger.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable logger"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jixi/Documents/code/Jxlog/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable logger"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/logger.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

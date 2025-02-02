@@ -1,3 +1,5 @@
+#pragma once
+
 #include "formatter/formatter.h"
 
 namespace logger{

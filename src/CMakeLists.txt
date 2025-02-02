@@ -23,10 +23,12 @@ if(ENABLE_LOG)
     target_compile_definitions(logger PRIVATE ENABLE_LOG)
 endif()
 
-set(FORMATTER_SRCS formatter/default_formatter.cpp)
+set(FORMATTER_SRCS formatter/formatter.cpp formatter/effective_formatter.cpp formatter/default_formatter.cpp)
 set(SINK_SRCS sinks/console_sink.cpp )
 set(CONTEXT_SRCS context/context.cpp context/executor.cpp context/thread_pool.cpp)
 set(COMPRESS_SRCS compress/zlib_compress.cpp compress/zstd_compress.cpp)
+set(CRYPT_SRCS crypt/aes_crypt.cpp crypt/crypt.cpp)
+set(PROTO_SRCS proto/effective_msg.pb.cc)
 # 条件编译 根据系统编译不同文件
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     set(UTILS_SRCS utils/sys_util_linux.cpp )
@@ -45,6 +47,8 @@ set(SRCS
     ${UTILS_SRCS}
     ${CONTEXT_SRCS}
     ${COMPRESS_SRCS}
+    ${CRYPT_SRCS}
+    ${PROTO_SRCS}
 )
 
 
@@ -62,3 +66,13 @@ target_link_libraries(logger PRIVATE ZLIB::ZLIB)
 
 find_package(zstd CONFIG REQUIRED)
 target_link_libraries(logger PRIVATE zstd::libzstd)
+
+find_package(OpenSSL REQUIRED)
+target_link_libraries(logger PRIVATE OpenSSL::SSL)
+target_link_libraries(logger PRIVATE OpenSSL::Crypto)
+
+find_package(cryptopp CONFIG REQUIRED)
+target_link_libraries(logger PRIVATE cryptopp::cryptopp)
+
+find_package(protobuf CONFIG REQUIRED)
+target_link_libraries(logger PRIVATE protobuf::libprotoc protobuf::libprotobuf protobuf::libprotobuf-lite)

@@ -249,6 +249,54 @@ context/thread_pool.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/context/thread_pool.cpp.s
 .PHONY : context/thread_pool.cpp.s
 
+crypt/aes_crypt.o: crypt/aes_crypt.cpp.o
+.PHONY : crypt/aes_crypt.o
+
+# target to build an object file
+crypt/aes_crypt.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/crypt/aes_crypt.cpp.o
+.PHONY : crypt/aes_crypt.cpp.o
+
+crypt/aes_crypt.i: crypt/aes_crypt.cpp.i
+.PHONY : crypt/aes_crypt.i
+
+# target to preprocess a source file
+crypt/aes_crypt.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/crypt/aes_crypt.cpp.i
+.PHONY : crypt/aes_crypt.cpp.i
+
+crypt/aes_crypt.s: crypt/aes_crypt.cpp.s
+.PHONY : crypt/aes_crypt.s
+
+# target to generate assembly for a file
+crypt/aes_crypt.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/crypt/aes_crypt.cpp.s
+.PHONY : crypt/aes_crypt.cpp.s
+
+crypt/crypt.o: crypt/crypt.cpp.o
+.PHONY : crypt/crypt.o
+
+# target to build an object file
+crypt/crypt.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/crypt/crypt.cpp.o
+.PHONY : crypt/crypt.cpp.o
+
+crypt/crypt.i: crypt/crypt.cpp.i
+.PHONY : crypt/crypt.i
+
+# target to preprocess a source file
+crypt/crypt.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/crypt/crypt.cpp.i
+.PHONY : crypt/crypt.cpp.i
+
+crypt/crypt.s: crypt/crypt.cpp.s
+.PHONY : crypt/crypt.s
+
+# target to generate assembly for a file
+crypt/crypt.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/crypt/crypt.cpp.s
+.PHONY : crypt/crypt.cpp.s
+
 formatter/default_formatter.o: formatter/default_formatter.cpp.o
 .PHONY : formatter/default_formatter.o
 
@@ -273,6 +321,54 @@ formatter/default_formatter.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/formatter/default_formatter.cpp.s
 .PHONY : formatter/default_formatter.cpp.s
 
+formatter/effective_formatter.o: formatter/effective_formatter.cpp.o
+.PHONY : formatter/effective_formatter.o
+
+# target to build an object file
+formatter/effective_formatter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/formatter/effective_formatter.cpp.o
+.PHONY : formatter/effective_formatter.cpp.o
+
+formatter/effective_formatter.i: formatter/effective_formatter.cpp.i
+.PHONY : formatter/effective_formatter.i
+
+# target to preprocess a source file
+formatter/effective_formatter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/formatter/effective_formatter.cpp.i
+.PHONY : formatter/effective_formatter.cpp.i
+
+formatter/effective_formatter.s: formatter/effective_formatter.cpp.s
+.PHONY : formatter/effective_formatter.s
+
+# target to generate assembly for a file
+formatter/effective_formatter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/formatter/effective_formatter.cpp.s
+.PHONY : formatter/effective_formatter.cpp.s
+
+formatter/formatter.o: formatter/formatter.cpp.o
+.PHONY : formatter/formatter.o
+
+# target to build an object file
+formatter/formatter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/formatter/formatter.cpp.o
+.PHONY : formatter/formatter.cpp.o
+
+formatter/formatter.i: formatter/formatter.cpp.i
+.PHONY : formatter/formatter.i
+
+# target to preprocess a source file
+formatter/formatter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/formatter/formatter.cpp.i
+.PHONY : formatter/formatter.cpp.i
+
+formatter/formatter.s: formatter/formatter.cpp.s
+.PHONY : formatter/formatter.s
+
+# target to generate assembly for a file
+formatter/formatter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/formatter/formatter.cpp.s
+.PHONY : formatter/formatter.cpp.s
+
 logger.o: logger.cpp.o
 .PHONY : logger.o
 
@@ -296,6 +392,30 @@ logger.s: logger.cpp.s
 logger.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/logger.cpp.s
 .PHONY : logger.cpp.s
+
+proto/effective_msg.pb.o: proto/effective_msg.pb.cc.o
+.PHONY : proto/effective_msg.pb.o
+
+# target to build an object file
+proto/effective_msg.pb.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/proto/effective_msg.pb.cc.o
+.PHONY : proto/effective_msg.pb.cc.o
+
+proto/effective_msg.pb.i: proto/effective_msg.pb.cc.i
+.PHONY : proto/effective_msg.pb.i
+
+# target to preprocess a source file
+proto/effective_msg.pb.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/proto/effective_msg.pb.cc.i
+.PHONY : proto/effective_msg.pb.cc.i
+
+proto/effective_msg.pb.s: proto/effective_msg.pb.cc.s
+.PHONY : proto/effective_msg.pb.s
+
+# target to generate assembly for a file
+proto/effective_msg.pb.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger.dir/build.make CMakeFiles/logger.dir/proto/effective_msg.pb.cc.s
+.PHONY : proto/effective_msg.pb.cc.s
 
 sinks/console_sink.o: sinks/console_sink.cpp.o
 .PHONY : sinks/console_sink.o
@@ -393,12 +513,27 @@ help:
 	@echo "... context/thread_pool.o"
 	@echo "... context/thread_pool.i"
 	@echo "... context/thread_pool.s"
+	@echo "... crypt/aes_crypt.o"
+	@echo "... crypt/aes_crypt.i"
+	@echo "... crypt/aes_crypt.s"
+	@echo "... crypt/crypt.o"
+	@echo "... crypt/crypt.i"
+	@echo "... crypt/crypt.s"
 	@echo "... formatter/default_formatter.o"
 	@echo "... formatter/default_formatter.i"
 	@echo "... formatter/default_formatter.s"
+	@echo "... formatter/effective_formatter.o"
+	@echo "... formatter/effective_formatter.i"
+	@echo "... formatter/effective_formatter.s"
+	@echo "... formatter/formatter.o"
+	@echo "... formatter/formatter.i"
+	@echo "... formatter/formatter.s"
 	@echo "... logger.o"
 	@echo "... logger.i"
 	@echo "... logger.s"
+	@echo "... proto/effective_msg.pb.o"
+	@echo "... proto/effective_msg.pb.i"
+	@echo "... proto/effective_msg.pb.s"
 	@echo "... sinks/console_sink.o"
 	@echo "... sinks/console_sink.i"
 	@echo "... sinks/console_sink.s"

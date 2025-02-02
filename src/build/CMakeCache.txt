@@ -219,6 +219,24 @@ CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 //The directory containing a CMake configuration file for GTest.
 GTest_DIR:PATH=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/gtest
 
+//Path to a library.
+OPENSSL_CRYPTO_LIBRARY:FILEPATH=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libcrypto.a
+
+//Path to a library.
+OPENSSL_DL_LIBRARY:FILEPATH=/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libdl.tbd
+
+//Path to a file.
+OPENSSL_INCLUDE_DIR:PATH=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/include
+
+//Path to a library.
+OPENSSL_SSL_LIBRARY:FILEPATH=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libssl.a
+
+//Arguments to supply to pkg-config
+PKG_CONFIG_ARGN:STRING=
+
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=/opt/homebrew/bin/pkg-config
+
 //Value Computed by CMake
 PROJECT_NAME_BINARY_DIR:STATIC=/Users/jixi/Documents/code/Jxlog/src/build
 
@@ -227,6 +245,9 @@ PROJECT_NAME_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 PROJECT_NAME_SOURCE_DIR:STATIC=/Users/jixi/Documents/code/Jxlog/src
+
+//Path to a program.
+Protobuf_PROTOC_EXECUTABLE:FILEPATH=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/tools/protobuf/protoc
 
 //Automatically copy dependencies into the output directory for
 // executables.
@@ -283,8 +304,32 @@ Z_VCPKG_CL:FILEPATH=Z_VCPKG_CL-NOTFOUND
 // triplet
 _VCPKG_INSTALLED_DIR:PATH=/Users/jixi/Documents/code/vcpkg/installed
 
+//The directory containing a CMake configuration file for absl.
+absl_DIR:PATH=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/absl
+
+//The directory containing a CMake configuration file for cryptopp.
+cryptopp_DIR:PATH=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/cryptopp
+
 //The directory containing a CMake configuration file for fmt.
 fmt_DIR:PATH=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/fmt
+
+//Path to a library.
+pkgcfg_lib__OPENSSL_crypto:FILEPATH=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libcrypto.a
+
+//Path to a library.
+pkgcfg_lib__OPENSSL_ssl:FILEPATH=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libssl.a
+
+//The directory containing a CMake configuration file for protobuf.
+protobuf_DIR:PATH=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/protobuf
+
+//CMake built-in FindProtobuf.cmake module compatible
+protobuf_MODULE_COMPATIBLE:BOOL=OFF
+
+//Enable for verbose output
+protobuf_VERBOSE:BOOL=OFF
+
+//The directory containing a CMake configuration file for utf8_range.
+utf8_range_DIR:PATH=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/utf8_range
 
 //The directory containing a CMake configuration file for zstd.
 zstd_DIR:PATH=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/zstd
@@ -439,8 +484,24 @@ CMAKE_UNAME:INTERNAL=/usr/bin/uname
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding GTest
 FIND_PACKAGE_MESSAGE_DETAILS_GTest:INTERNAL=[/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/share/gtest/GTestConfig.cmake][c ][v1.15.2()]
+//Details about finding OpenSSL
+FIND_PACKAGE_MESSAGE_DETAILS_OpenSSL:INTERNAL=[/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/libcrypto.a][/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/include][c ][v3.4.0()]
+//Details about finding Protobuf
+FIND_PACKAGE_MESSAGE_DETAILS_Protobuf:INTERNAL=[/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/tools/protobuf/protoc][/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/lib/libprotobuf.a][/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/include][v29.2.0()]
+//Details about finding Threads
+FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //Details about finding ZLIB
 FIND_PACKAGE_MESSAGE_DETAILS_ZLIB:INTERNAL=[/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/lib/libz.a][/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/include][c ][v1.3.1()]
+//ADVANCED property for variable: OPENSSL_CRYPTO_LIBRARY
+OPENSSL_CRYPTO_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENSSL_INCLUDE_DIR
+OPENSSL_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENSSL_SSL_LIBRARY
+OPENSSL_SSL_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_ARGN
+PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 //Install the dependencies listed in your manifest:
 //\n    If this is off, you will have to manually install your dependencies.
 //\n    See https://github.com/microsoft/vcpkg/tree/master/docs/specifications/manifests.md
@@ -459,4 +520,50 @@ ZLIB_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 Z_VCPKG_CHECK_MANIFEST_MODE:INTERNAL=OFF
 //Vcpkg root directory
 Z_VCPKG_ROOT_DIR:INTERNAL=/Users/jixi/Documents/code/vcpkg
+_OPENSSL_CFLAGS:INTERNAL=-I/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/pkgconfig/../../../include
+_OPENSSL_CFLAGS_I:INTERNAL=
+_OPENSSL_CFLAGS_OTHER:INTERNAL=
+_OPENSSL_FOUND:INTERNAL=1
+_OPENSSL_INCLUDEDIR:INTERNAL=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/pkgconfig/../../../include
+_OPENSSL_INCLUDE_DIRS:INTERNAL=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/pkgconfig/../../../include
+_OPENSSL_LDFLAGS:INTERNAL=-L/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/pkgconfig/../../lib;-lssl;-lcrypto
+_OPENSSL_LDFLAGS_OTHER:INTERNAL=
+_OPENSSL_LIBDIR:INTERNAL=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/pkgconfig/../../lib
+_OPENSSL_LIBRARIES:INTERNAL=ssl;crypto
+_OPENSSL_LIBRARY_DIRS:INTERNAL=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/pkgconfig/../../lib
+_OPENSSL_LIBS:INTERNAL=
+_OPENSSL_LIBS_L:INTERNAL=
+_OPENSSL_LIBS_OTHER:INTERNAL=
+_OPENSSL_LIBS_PATHS:INTERNAL=
+_OPENSSL_MODULE_NAME:INTERNAL=openssl
+_OPENSSL_PREFIX:INTERNAL=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/pkgconfig/../..
+_OPENSSL_STATIC_CFLAGS:INTERNAL=-I/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/pkgconfig/../../../include
+_OPENSSL_STATIC_CFLAGS_I:INTERNAL=
+_OPENSSL_STATIC_CFLAGS_OTHER:INTERNAL=
+_OPENSSL_STATIC_INCLUDE_DIRS:INTERNAL=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/pkgconfig/../../../include
+_OPENSSL_STATIC_LDFLAGS:INTERNAL=-L/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/pkgconfig/../../lib;-lssl;-lcrypto
+_OPENSSL_STATIC_LDFLAGS_OTHER:INTERNAL=
+_OPENSSL_STATIC_LIBDIR:INTERNAL=
+_OPENSSL_STATIC_LIBRARIES:INTERNAL=ssl;crypto
+_OPENSSL_STATIC_LIBRARY_DIRS:INTERNAL=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/pkgconfig/../../lib
+_OPENSSL_STATIC_LIBS:INTERNAL=
+_OPENSSL_STATIC_LIBS_L:INTERNAL=
+_OPENSSL_STATIC_LIBS_OTHER:INTERNAL=
+_OPENSSL_STATIC_LIBS_PATHS:INTERNAL=
+_OPENSSL_VERSION:INTERNAL=3.4.0
+_OPENSSL_openssl_INCLUDEDIR:INTERNAL=
+_OPENSSL_openssl_LIBDIR:INTERNAL=
+_OPENSSL_openssl_PREFIX:INTERNAL=
+_OPENSSL_openssl_VERSION:INTERNAL=
+__pkg_config_arguments__OPENSSL:INTERNAL=QUIET;openssl
+__pkg_config_checked__OPENSSL:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib__OPENSSL_crypto
+pkgcfg_lib__OPENSSL_crypto-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib__OPENSSL_ssl
+pkgcfg_lib__OPENSSL_ssl-ADVANCED:INTERNAL=1
+prefix_result:INTERNAL=/Users/jixi/Documents/code/vcpkg/installed/arm64-osx/debug/lib/pkgconfig/../../lib
+//ADVANCED property for variable: protobuf_MODULE_COMPATIBLE
+protobuf_MODULE_COMPATIBLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: protobuf_VERBOSE
+protobuf_VERBOSE-ADVANCED:INTERNAL=1
 
