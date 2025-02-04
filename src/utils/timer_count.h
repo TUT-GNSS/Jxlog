@@ -3,7 +3,7 @@
 #include <chrono>
 #include <string>
 
-#include "internal_log.h"
+#include "helpers/internal_log.h"
 
 namespace logger {
 

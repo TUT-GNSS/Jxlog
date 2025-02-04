@@ -1,9 +1,11 @@
+#include "sinks/effective_sink.h"
+
+#include <fmt/core.h>  // 引入fmt库的核心头文件
 #include <fstream>
 
 #include "compress/zstd_compress.h"
 #include "crypt/aes_crypt.h"
 #include "formatter/effective_formatter.h"
-#include "sinks/effective_sink.h"
 #include "utils/file_util.h"
 #include "utils/sys_util.h"
 #include "utils/timer_count.h"
@@ -35,13 +37,13 @@ EffectiveSink::EffectiveSink(Conf conf) : conf_(conf) {
   if (!master_cache_ || !slave_cache_) {
     throw std::runtime_error("EffectiveSink::EffectiveSink: create mmap failed");
   }
-  //
+  // 从缓冲区非空,则先将从缓冲区任务写入文件
   if (!slave_cache_->Empty()) {
     is_slave_free_.store(true);
     PrepareToFile_();
     WAIT_TASK_IDLE(task_runner_);
   }
-  // 主缓冲区不空,从缓冲区空则swap主从缓冲区,然后写入文件
+  // 主缓冲区非空,从缓冲区为空则swap主从缓冲区,然后写入文件
   if (!master_cache_->Empty()) {
     if (is_slave_free_) {
       is_slave_free_.store(false);
@@ -136,7 +138,7 @@ void EffectiveSink::WriteToCache_(const void* data, uint32_t size) {
 
 void EffectiveSink::PrepareToFile_() {
   // 将任务发布出去
-  POST_TASK(task_runner_, [this]() { CacheToFile_(); });
+  POST_TASK(task_runner_, [this]() { CacheToFile_();});
 }
 
 void EffectiveSink::CacheToFile_() {
@@ -157,7 +159,6 @@ void EffectiveSink::CacheToFile_() {
     chunk_header.size = slave_cache_->Size();
     // copy公钥
     memcpy(chunk_header.pub_key, client_pub_key_.data(), client_pub_key_.size());
-    // write header and slave data to file use append mode
     // 写入头部和数据通过文件追加模式
     std::ofstream ofs(file_path, std::ios::binary | std::ios::app);
     ofs.write(reinterpret_cast<char*>(&chunk_header), sizeof(chunk_header));
@@ -166,6 +167,72 @@ void EffectiveSink::CacheToFile_() {
   // 清空从缓冲区,设置从缓冲区空闲
   slave_cache_->Clear();
   is_slave_free_.store(true);
+}
+
+std::filesystem::path EffectiveSink::GetFilePath_() {
+  // 文件名格式：{prefix}_{datetime}.log 或 {prefix}_{datetime}_{index}.log
+  auto GetDateTimePath = [this]() -> std::filesystem::path {
+    std::time_t now = std::time(nullptr);
+    std::tm tm;
+    utils::LocalTime(&tm, &now);
+    char time_buf[32] = {0};
+    std::strftime(time_buf, sizeof(time_buf), "%Y%m%d%H%M%S", &tm);
+    return (conf_.dir / (conf_.prefix + "_" + time_buf));
+  };
+
+  if (log_file_path_.empty()) {
+    // 文件路径为空 直接赋值
+    log_file_path_ = GetDateTimePath().string() + ".log";
+  } else {
+    // 获取文件大小
+    auto file_size = filesystem::GetFileSize(log_file_path_);
+    // 文件大小超过单个文件最大值 创建新文件 否则继续用之前log_file_path_
+    if (file_size > conf_.single_size.count()) {
+      std::string date_time_path = GetDateTimePath().string();
+      std::string file_path = date_time_path + ".log";
+      // 同名文件 加索引号区分
+      if (std::filesystem::exists(file_path)) {
+        int idx = 0;
+        // 寻找同名文件个数
+        for (auto& path : std::filesystem::directory_iterator(conf_.dir)) {
+          if (path.path().filename().string().find(date_time_path) != std::string::npos) {
+            ++idx;
+          }
+        }
+        log_file_path_ = date_time_path + "_" + std::to_string(idx) + ".log";
+      } else {
+        log_file_path_ = std::move(file_path);
+      }
+    }
+  }
+  LOG_INFO("EffectiveSink::GetFilePath_: log_file_path={}", log_file_path_.string());
+  return log_file_path_;
+}
+
+void EffectiveSink::ElimateFiles_() {
+  LOG_INFO("EffectiveSink::ElimateFiles_: start");
+  // 将目录下所有日志文件存入files数组
+  std::vector<std::filesystem::path> files;
+  for (auto& path : std::filesystem::directory_iterator(conf_.dir)) {
+    if (path.path().extension() == ".log") {
+      files.push_back(path.path());
+    }
+  }
+  // 根据文件最后写入时间倒序排序
+  std::sort(files.begin(), files.end(), [](const std::filesystem::path& lhs, const std::filesystem::path& rhs) {
+    return std::filesystem::last_write_time(lhs) > std::filesystem::last_write_time(rhs);
+  });
+
+  // 超过总文件最大size 淘汰日期早的日志文件
+  size_t total_bytes = space_cast<bytes>(conf_.total_size).count();
+  size_t used_bytes = 0;
+  for (auto& file : files) {
+    used_bytes += filesystem::GetFileSize(file);
+    if (used_bytes > total_bytes) {
+      LOG_INFO("EffectiveSink::ElimateFiles_: remove file={}", file.string());
+      std::filesystem::remove(file);
+    }
+  }
 }
 
 }  // namespace sink

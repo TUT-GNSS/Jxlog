@@ -1,7 +1,7 @@
 #include <string.h>
 
-#include "file_util.h"
-#include "mmapper.h"
+#include "mmap/mmapper.h"
+#include "utils/file_util.h"
 #include "utils/sys_util.h"
 
 namespace logger {
@@ -20,9 +20,9 @@ void MMapper::Reserve_(size_t new_capcity) {
     return;
   }
   // 获取页表大小
-  size_t page_size = logger::utils::GetPageSize();
+  size_t page_size = utils::GetPageSize();
   // 扩容new_capcity + 一页页表的空间, 随后调整为page_size的整数倍
-  new_capcity = (((new_capcity * page_size - 1) / page_size) * page_size);
+  new_capcity = (((new_capcity + page_size - 1) / page_size) * page_size);
   if (new_capcity == capacity_) {
     return;
   }
@@ -34,6 +34,7 @@ void MMapper::Reserve_(size_t new_capcity) {
 }
 
 void MMapper::Init_() {
+
   MmapHeader* mmap_header_ptr = GetHeader_();
 
   if (!mmap_header_ptr) {
@@ -57,14 +58,6 @@ MMapper::MmapHeader* MMapper::GetHeader_() const {
   return static_cast<MmapHeader*>(mmaped_address_);
 }
 
-uint8_t* MMapper::Data() const {
-  if (!IsValid_()) {
-    return nullptr;
-  }
-  // 偏移MmapHeader大小头部
-  return static_cast<uint8_t*>(mmaped_address_ + sizeof(MmapHeader));
-}
-
 bool MMapper::IsValid_() const {
   MmapHeader* mmap_header_ptr = GetHeader_();
   if (!mmap_header_ptr) {
@@ -72,6 +65,14 @@ bool MMapper::IsValid_() const {
   }
   // 检查magic是否与kMagic相同
   return mmap_header_ptr->magic == MmapHeader::kMagic;
+}
+
+uint8_t* MMapper::Data() const {
+  if (!IsValid_()) {
+    return nullptr;
+  }
+  // 偏移MmapHeader大小头部
+  return static_cast<uint8_t*>(mmaped_address_) + sizeof(MmapHeader);
 }
 
 size_t MMapper::Size() const {
@@ -82,7 +83,7 @@ size_t MMapper::Size() const {
 }
 
 void MMapper::Clear() {
-  if (!IsValid_) {
+  if (!IsValid_()) {
     return;
   }
   GetHeader_()->size = 0;
@@ -99,7 +100,8 @@ void MMapper::Push(const void* data, size_t size) {
 }
 
 void MMapper::EnsureCapacity_(size_t new_size) {
-  if (new_size <= capacity_) {
+  size_t real_size = new_size + sizeof(MmapHeader);
+  if (real_size <= capacity_) {
     return;
   }
   size_t new_capacity = capacity_;
@@ -107,8 +109,9 @@ void MMapper::EnsureCapacity_(size_t new_size) {
   // 以page_size整数倍扩容capacity
   do {
     new_capacity += page_size;
-  } while (new_capacity < new_size);
-  capacity_ = new_capacity;
+  } while (new_capacity < real_size);
+
+  Reserve_(new_capacity);
 }
 
 double MMapper::GetRatio() const {
@@ -117,8 +120,6 @@ double MMapper::GetRatio() const {
   }
   return static_cast<double>(Size()) / Capacity_() - sizeof(MmapHeader);
 }
-
-void MMapper::Sync_() {}
 
 }  // namespace mmap
 }  // namespace logger

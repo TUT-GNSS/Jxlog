@@ -24,17 +24,17 @@ if(ENABLE_LOG)
 endif()
 
 set(FORMATTER_SRCS formatter/formatter.cpp formatter/effective_formatter.cpp formatter/default_formatter.cpp)
-set(SINK_SRCS sinks/console_sink.cpp )
+set(SINK_SRCS sinks/console_sink.cpp sinks/effective_sink.cpp )
 set(CONTEXT_SRCS context/context.cpp context/executor.cpp context/thread_pool.cpp)
 set(COMPRESS_SRCS compress/zlib_compress.cpp compress/zstd_compress.cpp)
 set(CRYPT_SRCS crypt/aes_crypt.cpp crypt/crypt.cpp)
 set(PROTO_SRCS proto/effective_msg.pb.cc)
 # 条件编译 根据系统编译不同文件
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    set(UTILS_SRCS utils/sys_util_linux.cpp )
+    set(UTILS_SRCS utils/sys_util_linux.cpp utils/file_util.cpp)
     set(MMAP_SRCS mmap/mmapper.cpp mmap/mmapper_linux.cpp)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-    set(UTILS_SRCS utils/sys_util_linux.cpp )
+    set(UTILS_SRCS utils/sys_util_linux.cpp utils/file_util.cpp)
     set(MMAP_SRCS mmap/mmapper.cpp mmap/mmapper_linux.cpp)
 else()
     message(FATAL_ERROR "system unsupported.")
@@ -44,6 +44,7 @@ set(SRCS
     logger.cpp
     ${FORMATTER_SRCS}
     ${SINK_SRCS}
+    ${MMAP_SRCS}
     ${UTILS_SRCS}
     ${CONTEXT_SRCS}
     ${COMPRESS_SRCS}

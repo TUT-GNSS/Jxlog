@@ -1,3 +1,5 @@
+#pragma once
+
 #include "compress/compress.h"
 #include "zstd.h"
 
