@@ -1,17 +1,17 @@
 #pragma once
 
 #include <string.h>
+
+#include <chrono>
 #include <cstdint>
+#include <iostream>
 #include <memory>
 #include <string>
 #include <string_view>
 #include <type_traits>
-#include <iostream>
-#include <chrono>
 #include <unordered_map>
 
 #include "helpers/internal_log.h"
-
 
 #define LOGGER_LEVEL_TRACE 0
 #define LOGGER_LEVEL_DEBUG 1
@@ -21,12 +21,10 @@
 #define LOGGER_LEVEL_CRITICAL 5
 #define LOGGER_LEVEL_OFF 6
 
-
-namespace logger
-{
+namespace logger {
 using StringView = std::string_view;
 
-enum class LogLevel{
+enum class LogLevel {
   kTrace = LOGGER_LEVEL_TRACE,
   kDebug = LOGGER_LEVEL_DEBUG,
   kInfo = LOGGER_LEVEL_INFO,
@@ -36,23 +34,20 @@ enum class LogLevel{
   kOff = LOGGER_LEVEL_OFF
 };
 
-
-
-
 struct SourceLocation {
   constexpr SourceLocation() = default;
 
-  SourceLocation(StringView file_name_in, int32_t line_in, StringView func_name_in)
+  SourceLocation(StringView file_name_in, int32_t line_in,
+                 StringView func_name_in)
       : file_name{file_name_in}, line{line_in}, func_name{func_name_in} {
-    
     // 获取文件名
     if (!file_name.empty()) {
-      size_t pos = file_name.rfind('/'); //Unix文件路径分隔
+      size_t pos = file_name.rfind('/');  // Unix文件路径分隔
       if (pos != StringView::npos) {
-        //截取'/'之后
+        // 截取'/'之后
         file_name = file_name.substr(pos + 1);
       } else {
-        pos = file_name.rfind('\\');//windows文件路径分割
+        pos = file_name.rfind('\\');  // windows文件路径分割
         if (pos != StringView::npos) {
           file_name = file_name.substr(pos + 1);
         }
@@ -65,5 +60,4 @@ struct SourceLocation {
   StringView func_name;
 };
 
-} // namespace logger
-
+}  // namespace logger

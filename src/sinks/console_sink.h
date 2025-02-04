@@ -1,10 +1,10 @@
 #include "sinks/sink.h"
 
-namespace logger{
-namespace sink{
+namespace logger {
+namespace sink {
 
-class ConsoleSink : public Sink{
-public:
+class ConsoleSink : public Sink {
+ public:
   ConsoleSink();
 
   ~ConsoleSink() override = default;
@@ -17,5 +17,5 @@ public:
   std::unique_ptr<formatter::Formatter> formatter_;
 };
 
-} // namespace sink
-} // namespace logger
+}  // namespace sink
+}  // namespace logger

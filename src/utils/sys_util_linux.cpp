@@ -1,21 +1,16 @@
 
 
+#include <sys/syscall.h>
+#include <unistd.h>
+
 #include "utils/sys_util.h"
 
-#include <unistd.h>
-#include <sys/syscall.h>
-
 namespace logger {
-namespace utils
-{
+namespace utils {
 
-size_t GetPageSize() {
-  return getpagesize();
-}
+size_t GetPageSize() { return getpagesize(); }
 
-size_t GetProcessID() {
-  return static_cast<size_t>(::getpid());
-}
+size_t GetProcessID() { return static_cast<size_t>(::getpid()); }
 
 size_t GetThreadID() {
   pthread_t thread = pthread_self();
@@ -24,9 +19,7 @@ size_t GetThreadID() {
   return static_cast<size_t>(thread_id);
 }
 
-void LocalTime(std::tm* tm, std::time_t* now) {
-  localtime_r(now, tm);
-}
+void LocalTime(std::tm* tm, std::time_t* now) { localtime_r(now, tm); }
 
-} // namespace utils
+}  // namespace utils
 }  // namespace logger

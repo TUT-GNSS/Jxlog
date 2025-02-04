@@ -1,40 +1,38 @@
 #include "thread_pool.h"
 
-namespace logger
-{
-namespace context
-{
-void ThreadPool::Stop(){
-  if(is_available_.load()){
+namespace logger {
+namespace context {
+void ThreadPool::Stop() {
+  if (is_available_.load()) {
     is_shutdown_.store(true);
-    //停止队列阻塞
+    // 停止队列阻塞
     task_queue_.StopWait();
     is_available_.store(false);
   }
   this->worker_threads_.clear();
 }
 
-bool ThreadPool::Start(){
-  if(is_available_.load()){
+bool ThreadPool::Start() {
+  if (is_available_.load()) {
     return false;
   }
   is_available_.store(true);
   uint32_t thread_count = thread_count_.load();
-  for(uint32_t i = 0; i < thread_count; ++i){
+  for (uint32_t i = 0; i < thread_count; ++i) {
     AddThread();
   }
   return true;
 }
 
-void ThreadPool::AddThread(){
-  //创建ThreadInfo对象
+void ThreadPool::AddThread() {
+  // 创建ThreadInfo对象
   ThreadInfoPtr thread_info_ptr = std::make_shared<ThreadInfo>();
 
-  auto func = [this](){
-    while(!is_shutdown_){
+  auto func = [this]() {
+    while (!is_shutdown_) {
       Task task;
-      //从任务队列取出任务
-      if(task_queue_.WaitPop(task)){
+      // 从任务队列取出任务
+      if (task_queue_.WaitPop(task)) {
         task();
       }
     }
@@ -49,5 +47,5 @@ ThreadPool::ThreadInfo::~ThreadInfo() {
   }
 }
 
-} // namespace context
-} // namespace logger
+}  // namespace context
+}  // namespace logger

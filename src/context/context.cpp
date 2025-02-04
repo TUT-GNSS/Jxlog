@@ -1,32 +1,29 @@
 #include "context.h"
 
-namespace logger
-{
-namespace context
-{
+namespace logger {
+namespace context {
 
-class ExecutorManager{
-public:
+class ExecutorManager {
+ public:
+  ExecutorManager() : executor_(std::make_unique<Executor>()) {}
+  ~ExecutorManager() { executor_.reset(); }
 
-  ExecutorManager():executor_(std::make_unique<Executor>()){}
-  ~ExecutorManager() {executor_.reset();}
+  Executor* GetExecutor() { return executor_.get(); }
+  TaskRunnerTag NewTaskRunner(TaskRunnerTag tag) {
+    return executor_->AddTaskRunner(tag);
+  }
 
-  Executor* GetExecutor(){return executor_.get();}
-  TaskRunnerTag NewTaskRunner(TaskRunnerTag tag) {return executor_->AddTaskRunner(tag);}
-
-private:
+ private:
   std::unique_ptr<Executor> executor_;
 };
 
-Context::Context():executor_manager_(std::make_unique<ExecutorManager>()){}
+Context::Context() : executor_manager_(std::make_unique<ExecutorManager>()) {}
 
-Executor* Context::GetExecutor(){
-  return executor_manager_->GetExecutor();
-}
+Executor* Context::GetExecutor() { return executor_manager_->GetExecutor(); }
 
-TaskRunnerTag Context::NewTaskRunner(TaskRunnerTag tag){
+TaskRunnerTag Context::NewTaskRunner(TaskRunnerTag tag) {
   return executor_manager_->NewTaskRunner(tag);
 }
 
-} // namespace context
-} // namespace logger
+}  // namespace context
+}  // namespace logger

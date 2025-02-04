@@ -3,20 +3,19 @@
 #include <filesystem>
 #include <memory>
 
-namespace logger{
-namespace mmap{
-    
+namespace logger {
+namespace mmap {
 
-class MMapper{
-public:
+class MMapper {
+ public:
   using FilePath = std::filesystem::path;
 
   explicit MMapper(FilePath file_path);
 
   ~MMapper() = default;
-  MMapper(const MMapper &other) = delete;
-  MMapper& operator= (MMapper other) = delete;
-  
+  MMapper(const MMapper& other) = delete;
+  MMapper& operator=(MMapper other) = delete;
+
   uint8_t* Data() const;
 
   size_t Size() const;
@@ -25,12 +24,12 @@ public:
 
   void Push(const void* data, size_t size);
 
-  //mmap实际内容与mmap所占空间比率
+  // mmap实际内容与mmap所占空间比率
   double GetRatio() const;
 
   bool Empty() const { return Size() == 0; }
 
-private:
+ private:
   // 内存映射的头部
   struct MmapHeader {
     static constexpr uint32_t kMagic = 0xdeadbeef;
@@ -52,16 +51,15 @@ private:
 
   void Init_();
 
-  //根据系统不同有不同实现
-  bool TryMap_(size_t capacity);//分配新内存
-  //根据系统不同有不同实现
-  void Unmap_();//解除原有映射
+  // 根据系统不同有不同实现
+  bool TryMap_(size_t capacity);  // 分配新内存
+  // 根据系统不同有不同实现
+  void Unmap_();  // 解除原有映射
 
   FilePath file_path_;
-  void* mmaped_address_;//mmap映射内存的首地址
-  size_t capacity_; 
-
+  void* mmaped_address_;  // mmap映射内存的首地址
+  size_t capacity_;
 };
 
-} // namespace mmap
-} // namespace logger
+}  // namespace mmap
+}  // namespace logger

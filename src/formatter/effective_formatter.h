@@ -3,12 +3,11 @@
 #include "formatter/formatter.h"
 
 namespace logger {
-namespace formatter
-{
+namespace formatter {
 class EffectiveFormatter : public Formatter {
-public:
+ public:
   void Format(const LogMsg& msg, std::string& dest) override;
-};   
+};
 
-} // namespace formatter
+}  // namespace formatter
 }  // namespace logger

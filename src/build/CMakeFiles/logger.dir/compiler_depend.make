@@ -12926,6 +12926,7 @@ CMakeFiles/logger.dir/test.cpp.o: /Users/jixi/Documents/code/Jxlog/src/test.cpp 
   /Users/jixi/Documents/code/JxLog/src/proto/effective_msg.pb.h \
   /Users/jixi/Documents/code/JxLog/src/sinks/console_sink.h \
   /Users/jixi/Documents/code/JxLog/src/sinks/sink.h \
+  /Users/jixi/Documents/code/JxLog/src/space.h \
   /Users/jixi/Documents/code/JxLog/src/utils/sys_util.h \
   /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/include/absl/algorithm/algorithm.h \
   /Users/jixi/Documents/code/vcpkg/installed/arm64-osx/include/absl/base/attributes.h \
@@ -14005,6 +14006,8 @@ CMakeFiles/logger.dir/utils/sys_util_linux.cpp.o: /Users/jixi/Documents/code/Jxl
 
 
 /Users/jixi/Documents/code/Jxlog/src/utils/sys_util_linux.cpp:
+
+/Users/jixi/Documents/code/JxLog/src/space.h:
 
 /Users/jixi/Documents/code/JxLog/src/context/thread_pool.h:
 
