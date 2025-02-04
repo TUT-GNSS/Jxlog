@@ -12,11 +12,17 @@ size_t GetPageSize() {
   return info.dwPageSize;
 }
 
-size_t GetProcessID() { return static_cast<size_t>(::GetCurrentProcessId()); }
+size_t GetProcessID() {
+  return static_cast<size_t>(::GetCurrentProcessId());
+}
 
-size_t GetThreadID() { return static_cast<size_t>(::GetCurrentThreadId()); }
+size_t GetThreadID() {
+  return static_cast<size_t>(::GetCurrentThreadId());
+}
 
-void LocalTime(std::tm* tm, std::time_t* now) { localtime_s(tm, now); }
+void LocalTime(std::tm* tm, std::time_t* now) {
+  localtime_s(tm, now);
+}
 
 }  // namespace utils
 }  // namespace logger

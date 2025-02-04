@@ -27,8 +27,7 @@ class ThreadQueue {
   // 阻塞pop
   bool WaitPop(T& val) {
     std::unique_lock<std::mutex> lock(mtx_);
-    queue_cv_.wait(
-        lock, [this]() { return !data_queue_.empty() || stop_wait_.load(); });
+    queue_cv_.wait(lock, [this]() { return !data_queue_.empty() || stop_wait_.load(); });
     if (stop_wait_) {
       return false;
     }
@@ -41,8 +40,7 @@ class ThreadQueue {
   T WaitPop() {
     std::unique_lock<std::mutex> lock(mtx_);
     // 等待直到队列非空或者停止阻塞
-    queue_cv_.wait(lock,
-                   [this]() { return !data_queue_.empty() || stop_wait_; });
+    queue_cv_.wait(lock, [this]() { return !data_queue_.empty() || stop_wait_; });
     if (stop_wait_) {
       return std::shared_ptr<T>();
     }

@@ -39,9 +39,9 @@ class EffectiveSink : public Sink {
  public:
   // 保存配置的结构体
   struct Conf {
-    std::filesystem::path dir;  // 文件目录
-    std::string prefix;   // 文件名前缀，文件名命名格式：{prefix}_{datetime}.log
-    std::string pub_key;  // 公钥
+    std::filesystem::path dir;         // 文件目录
+    std::string prefix;                // 文件名前缀，文件名命名格式：{prefix}_{datetime}.log
+    std::string pub_key;               // 公钥
     std::chrono::minutes interval{5};  // 淘汰间隔
     megabytes single_size{4};          // 单个文件大小
     megabytes total_size{100};         // 总共文件大小

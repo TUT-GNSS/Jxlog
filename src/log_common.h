@@ -37,8 +37,7 @@ enum class LogLevel {
 struct SourceLocation {
   constexpr SourceLocation() = default;
 
-  SourceLocation(StringView file_name_in, int32_t line_in,
-                 StringView func_name_in)
+  SourceLocation(StringView file_name_in, int32_t line_in, StringView func_name_in)
       : file_name{file_name_in}, line{line_in}, func_name{func_name_in} {
     // 获取文件名
     if (!file_name.empty()) {

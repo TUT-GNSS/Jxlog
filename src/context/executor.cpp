@@ -9,7 +9,9 @@ Executor::ExecutorTimer::ExecutorTimer() {
   running_.store(false);
 }
 
-Executor::ExecutorTimer::~ExecutorTimer() { this->Stop(); }
+Executor::ExecutorTimer::~ExecutorTimer() {
+  this->Stop();
+}
 
 void Executor::ExecutorTimer::Stop() {
   running_.store(false);
@@ -37,8 +39,7 @@ void Executor::ExecutorTimer::Run_() {
     // 当前时间与任务执行时间的差
     auto diff = s.time_point_ - std::chrono::high_resolution_clock::now();
 
-    if (std::chrono::duration_cast<std::chrono::microseconds>(diff).count() >
-        0) {
+    if (std::chrono::duration_cast<std::chrono::microseconds>(diff).count() > 0) {
       // 阻塞等待剩余时间
       cond_cv_.wait_for(lk, diff);
       continue;
@@ -50,8 +51,7 @@ void Executor::ExecutorTimer::Run_() {
   }
 }
 
-void Executor::ExecutorTimer::PostDelayedTask(
-    Task task, const std::chrono::microseconds& delay_time) {
+void Executor::ExecutorTimer::PostDelayedTask(Task task, const std::chrono::microseconds& delay_time) {
   auto time_point = std::chrono::high_resolution_clock::now() + delay_time;
   {
     std::lock_guard<std::mutex> lk(mtx_);
@@ -61,19 +61,17 @@ void Executor::ExecutorTimer::PostDelayedTask(
 }
 
 // 放入repeated_id字典 调用PostRepeatedTask_()
-RepeatedTaskId Executor::ExecutorTimer::PostRepeatedTask(
-    Task task, const std::chrono::microseconds& delay_time,
-    RepeatedTaskNum repeated_num) {
+RepeatedTaskId Executor::ExecutorTimer::PostRepeatedTask(Task task,
+                                                         const std::chrono::microseconds& delay_time,
+                                                         RepeatedTaskNum repeated_num) {
   // 获取repeated_task_id
   RepeatedTaskId repeated_task_id = GetNextPepeatedTaskId();
   repeated_id_state_set_.insert(repeated_task_id);
-  PostRepeatedTask_(std::move(task), delay_time, repeated_task_id,
-                    repeated_num);
+  PostRepeatedTask_(std::move(task), delay_time, repeated_task_id, repeated_num);
   return repeated_task_id;
 }
 
-void Executor::ExecutorTimer::CancelRepeatedTask(
-    RepeatedTaskId repeated_task_id) {
+void Executor::ExecutorTimer::CancelRepeatedTask(RepeatedTaskId repeated_task_id) {
   repeated_id_state_set_.erase(repeated_task_id);
 }
 
@@ -82,24 +80,21 @@ void Executor::ExecutorTimer::PostTask_(Task task,
                                         std::chrono::microseconds delay_time,
                                         RepeatedTaskId repeated_task_id,
                                         RepeatedTaskNum repeated_task_num) {
-  PostRepeatedTask_(std::move(task), delay_time, repeated_task_id,
-                    repeated_task_num);
+  PostRepeatedTask_(std::move(task), delay_time, repeated_task_id, repeated_task_num);
 }
 
 // 调用task() 然后将重复次数-1 重新将自己入队
-void Executor::ExecutorTimer::PostRepeatedTask_(
-    Task task, const std::chrono::microseconds& delay_time,
-    RepeatedTaskId repeated_task_id, RepeatedTaskNum repeated_task_num) {
-  if (repeated_id_state_set_.find(repeated_task_id) ==
-          repeated_id_state_set_.end() ||
-      repeated_task_num == 0) {
+void Executor::ExecutorTimer::PostRepeatedTask_(Task task,
+                                                const std::chrono::microseconds& delay_time,
+                                                RepeatedTaskId repeated_task_id,
+                                                RepeatedTaskNum repeated_task_num) {
+  if (repeated_id_state_set_.find(repeated_task_id) == repeated_id_state_set_.end() || repeated_task_num == 0) {
     return;
   }
   // 执行重复任务
   task();
-  Task func =
-      std::bind(&Executor::ExecutorTimer::PostTask_, this, std::move(task),
-                delay_time, repeated_task_id, repeated_task_num - 1);
+  Task func = std::bind(&Executor::ExecutorTimer::PostTask_, this, std::move(task), delay_time, repeated_task_id,
+                        repeated_task_num - 1);
 
   auto time_point_ = std::chrono::high_resolution_clock::now() + delay_time;
   {
@@ -108,8 +103,7 @@ void Executor::ExecutorTimer::PostRepeatedTask_(
   }
   cond_cv_.notify_all();
 }
-TaskRunnerTag Executor::ExecutorContext::AddTaskRunner(
-    const TaskRunnerTag& tag) {
+TaskRunnerTag Executor::ExecutorContext::AddTaskRunner(const TaskRunnerTag& tag) {
   std::lock_guard<std::mutex> lock(mtx_);
   TaskRunnerTag latest_tag = tag;
   // 找到没使用的tag
@@ -123,8 +117,7 @@ TaskRunnerTag Executor::ExecutorContext::AddTaskRunner(
   return latest_tag;
 }
 
-Executor::ExecutorContext::TaskRunner* Executor::ExecutorContext::GetTaskRunner(
-    const TaskRunnerTag& tag) {
+Executor::ExecutorContext::TaskRunner* Executor::ExecutorContext::GetTaskRunner(const TaskRunnerTag& tag) {
   std::lock_guard<std::mutex> lk(mtx_);
   if (task_runner_map_.find(tag) == task_runner_map_.end()) {
     return nullptr;
@@ -155,8 +148,7 @@ TaskRunnerTag Executor::AddTaskRunner(const TaskRunnerTag& tag) {
 }
 
 void Executor::PostTask(const TaskRunnerTag& runner_tag, Task task) {
-  ExecutorContext::TaskRunner* task_runner =
-      executor_context_->GetTaskRunner(runner_tag);
+  ExecutorContext::TaskRunner* task_runner = executor_context_->GetTaskRunner(runner_tag);
   task_runner->RunTask(std::move(task));
 }
 

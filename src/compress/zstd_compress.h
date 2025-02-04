@@ -9,8 +9,7 @@ class ZstdCompression final : public Compression {
   ZstdCompression();
   ~ZstdCompression() override;
 
-  size_t Compress(const void* input, size_t input_size, void* output,
-                  size_t output_size) override;
+  size_t Compress(const void* input, size_t input_size, void* output, size_t output_size) override;
 
   std::string Uncompress(const void* data, size_t size) override;
 

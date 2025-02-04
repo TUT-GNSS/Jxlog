@@ -2,8 +2,7 @@
 
 namespace logger {
 namespace compress {
-size_t ZlibCompression::Compress(const void* input, size_t input_size,
-                                 void* output, size_t output_size) {
+size_t ZlibCompression::Compress(const void* input, size_t input_size, void* output, size_t output_size) {
   if (!input_size || !output_size) {
     return 0;
   }
@@ -41,8 +40,7 @@ static bool IsCompress(const void* data, size_t size) {
   }
 
   uint16_t magic = *(uint16_t*)data;
-  if (magic == 0x9c78 || magic == 0xda78 || magic == 0x5e78 ||
-      magic == 0x0178) {
+  if (magic == 0x9c78 || magic == 0xda78 || magic == 0x5e78 || magic == 0x0178) {
     return true;
   }
 
@@ -86,15 +84,13 @@ std::string ZlibCompression::Uncompress(const void* data, size_t size) {
 
 void ZlibCompression::ResetStream() {
   // 创建并初始化压缩流对象
-  compress_stream_ =
-      std::unique_ptr<z_stream, ZStreamDeflateDeleter>(new z_stream());
+  compress_stream_ = std::unique_ptr<z_stream, ZStreamDeflateDeleter>(new z_stream());
   compress_stream_->zalloc = Z_NULL;
   compress_stream_->zfree = Z_NULL;
   compress_stream_->opaque = Z_NULL;
   // 调用 deflateInit2 初始化压缩流
-  int32_t ret =
-      deflateInit2(compress_stream_.get(), Z_BEST_COMPRESSION, Z_DEFLATED,
-                   MAX_WBITS, MAX_MEM_LEVEL, Z_DEFAULT_STRATEGY);
+  int32_t ret = deflateInit2(compress_stream_.get(), Z_BEST_COMPRESSION, Z_DEFLATED, MAX_WBITS, MAX_MEM_LEVEL,
+                             Z_DEFAULT_STRATEGY);
   if (ret != Z_OK) {
     compress_stream_.reset();  // 初始化失败，释放压缩流
   }
@@ -102,8 +98,7 @@ void ZlibCompression::ResetStream() {
 
 void ZlibCompression::ResetUncompressStream_() {
   // 创建并初始化解压缩流
-  uncompress_stream_ =
-      std::unique_ptr<z_stream, ZStreamInflateDeleter>(new z_stream());
+  uncompress_stream_ = std::unique_ptr<z_stream, ZStreamInflateDeleter>(new z_stream());
   uncompress_stream_->zalloc = Z_NULL;
   uncompress_stream_->zfree = Z_NULL;
   uncompress_stream_->opaque = Z_NULL;

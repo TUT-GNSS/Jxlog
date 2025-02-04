@@ -3,12 +3,9 @@
 
 namespace logger {
 Logger::Logger(std::string name, SinkPtr sink)
-    : name_{std::move(name)},
-      level_{LogLevel::kInfo},
-      sinks_{std::move(sink)} {}
+    : name_{std::move(name)}, level_{LogLevel::kInfo}, sinks_{std::move(sink)} {}
 
-Logger::Logger(std::string name, SinkPtrInitList sinks)
-    : name_{std::move(name)}, level_{LogLevel::kInfo} {
+Logger::Logger(std::string name, SinkPtrInitList sinks) : name_{std::move(name)}, level_{LogLevel::kInfo} {
   for (auto& sink : sinks) {
     sinks_.emplace_back(std::move(sink));
   }
@@ -30,11 +27,17 @@ Logger& Logger::operator=(Logger other) noexcept {
   return *this;
 }
 
-Logger::~Logger() { std::cout << "logger析构" << "\n"; }
+Logger::~Logger() {
+  std::cout << "logger析构" << "\n";
+}
 
-void Logger::SetLevel(LogLevel level) { level_ = level; }
+void Logger::SetLevel(LogLevel level) {
+  level_ = level;
+}
 
-LogLevel Logger::GetLevel() const { return level_; }
+LogLevel Logger::GetLevel() const {
+  return level_;
+}
 
 void Logger::Log(LogLevel level, SourceLocation loc, StringView message) {
   if (!ShouldLog_(level)) {

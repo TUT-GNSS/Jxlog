@@ -27,8 +27,7 @@ class Logger {
 
   // 根据存储sink的容器迭代器构造
   template <typename It>
-  Logger(std::string name, It begin, It end)
-      : Logger(name, SinkPtrInitList(begin, end)) {}
+  Logger(std::string name, It begin, It end) : Logger(name, SinkPtrInitList(begin, end)) {}
 
   // 虚析构
   ~Logger();
@@ -44,9 +43,7 @@ class Logger {
   void Log(LogLevel level, SourceLocation loc, StringView message);
 
  protected:
-  bool ShouldLog_(LogLevel level) const noexcept {
-    return level >= level_ && !sinks_.empty();
-  }
+  bool ShouldLog_(LogLevel level) const noexcept { return level >= level_ && !sinks_.empty(); }
 
   virtual void Log_(const LogMsg& msg);
 

@@ -27,8 +27,7 @@ struct ZStreamInflateDeleter {
 class ZlibCompression final : public Compression {
  public:
   ~ZlibCompression() override = default;
-  size_t Compress(const void* input, size_t input_size, void* output,
-                  size_t output_size) override;
+  size_t Compress(const void* input, size_t input_size, void* output, size_t output_size) override;
 
   size_t CompressedBound(size_t input_size) override;
 
@@ -39,9 +38,8 @@ class ZlibCompression final : public Compression {
  private:
   void ResetUncompressStream_();
 
-  std::unique_ptr<z_stream, ZStreamDeflateDeleter> compress_stream_;  // 压缩流
-  std::unique_ptr<z_stream, ZStreamInflateDeleter>
-      uncompress_stream_;  // 解压流
+  std::unique_ptr<z_stream, ZStreamDeflateDeleter> compress_stream_;    // 压缩流
+  std::unique_ptr<z_stream, ZStreamInflateDeleter> uncompress_stream_;  // 解压流
 };
 }  // namespace compress
 }  // namespace logger

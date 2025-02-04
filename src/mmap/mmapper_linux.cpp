@@ -35,8 +35,7 @@ bool MMapper::TryMap_(size_t capacity) {
     ftruncate(fd, capacity);
   }
 
-  mmaped_address_ =
-      ::mmap(NULL, capacity, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+  mmaped_address_ = ::mmap(NULL, capacity, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
   return mmaped_address_ != MAP_FAILED;
 }
 

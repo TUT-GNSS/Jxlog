@@ -11,8 +11,7 @@ class Compression {
   Compression() = default;
   virtual ~Compression() = default;
 
-  virtual size_t Compress(const void* input, size_t input_size, void* output,
-                          size_t output_size) = 0;
+  virtual size_t Compress(const void* input, size_t input_size, void* output, size_t output_size) = 0;
 
   virtual size_t CompressedBound(size_t input_size) = 0;
 

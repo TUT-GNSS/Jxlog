@@ -27,8 +27,7 @@ class space;
 template <typename _ToSpace, typename _Rep, typename _Capacity>
 constexpr _ToSpace space_cast(const space<_Rep, _Capacity>& __d) {
   // 计算转换后的数值，使用ratio_divide来处理比例的转换
-  auto __r = __d.count() *
-             std::ratio_divide<_Capacity, typename _ToSpace::period>::num /
+  auto __r = __d.count() * std::ratio_divide<_Capacity, typename _ToSpace::period>::num /
              std::ratio_divide<_Capacity, typename _ToSpace::period>::den;
   // 返回转换后的空间对象，使用_ToSpace类型来构造对象
   return _ToSpace(__r);
@@ -49,8 +48,7 @@ class space {
 
   // 构造函数，space类型初始化
   template <typename _Rep2, typename _Capacity2>
-  constexpr space(const space<_Rep2, _Capacity2>& __d)
-      : _rep(space_cast<space>(__d).count()) {}
+  constexpr space(const space<_Rep2, _Capacity2>& __d) : _rep(space_cast<space>(__d).count()) {}
 
   // 获取当前数值
   constexpr _Rep count() const { return _rep; }
@@ -123,15 +121,13 @@ class space {
 
 // 定义加法运算符，用于space类型的加法
 template <typename _Rep, typename _Capacity>
-constexpr space<_Rep, _Capacity> operator+(const space<_Rep, _Capacity>& __x,
-                                           const space<_Rep, _Capacity>& __y) {
+constexpr space<_Rep, _Capacity> operator+(const space<_Rep, _Capacity>& __x, const space<_Rep, _Capacity>& __y) {
   return space<_Rep, _Capacity>(__x.count() + __y.count());
 }
 
 // 定义减法运算符，用于space类型的减法
 template <typename _Rep, typename _Capacity>
-constexpr space<_Rep, _Capacity> operator-(const space<_Rep, _Capacity>& __x,
-                                           const space<_Rep, _Capacity>& __y) {
+constexpr space<_Rep, _Capacity> operator-(const space<_Rep, _Capacity>& __x, const space<_Rep, _Capacity>& __y) {
   return space<_Rep, _Capacity>(__x.count() - __y.count());
 }
 

@@ -13,8 +13,7 @@ class Sink {
 
   virtual void Log(const LogMsg& msg) = 0;
 
-  virtual void SetFormatter(
-      std::unique_ptr<formatter::Formatter> formatter) = 0;
+  virtual void SetFormatter(std::unique_ptr<formatter::Formatter> formatter) = 0;
 
   virtual void Flush() {}
 };

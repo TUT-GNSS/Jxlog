@@ -37,8 +37,7 @@ class ExecuteOnScopeExit {
 // 使用当前行号创建唯一对象
 // 例如: _MAKE_DEFER_(42)就是 logger::helpers::ExecuteOnScopeExit deffer42 =
 // [&]()
-#define _MAKE_DEFER_(line) \
-  logger::helpers::ExecuteOnScopeExit _LOG_CONCAT(defer, line) = [&]()
+#define _MAKE_DEFER_(line) logger::helpers::ExecuteOnScopeExit _LOG_CONCAT(defer, line) = [&]()
 
 #undef LOG_DEFER
 #define LOG_DEFER _MAKE_DEFER_(__LINE__)

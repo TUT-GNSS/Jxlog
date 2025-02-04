@@ -15,8 +15,7 @@ EffectiveSink::EffectiveSink(Conf conf) : conf_(conf) {
   if (!std::filesystem::exists(conf_.dir)) {
     std::filesystem::create_directories(conf_.dir);
   }
-  formatter_ =
-      std::make_unique<formatter::EffectiveFormatter>();  // 初始化formatter_
+  formatter_ = std::make_unique<formatter::EffectiveFormatter>();  // 初始化formatter_
 
   task_runner_ = NEW_TASK_RUNNER(20010305);  // tag为20010305
   // 初始化crypt_
@@ -25,8 +24,7 @@ EffectiveSink::EffectiveSink(Conf conf) : conf_(conf) {
   client_pub_key_ = std::get<1>(ecdh_key);
   LOG_INFO("EffectiveSink: client pub size {}", client_pub_key_.size());
   std::string svr_pub_key_bin = crypt::HexKeyToBinary(conf_.pub_key);
-  std::string shared_secret =
-      crypt::GenECDHSharedSecret(client_pri, svr_pub_key_bin);
+  std::string shared_secret = crypt::GenECDHSharedSecret(client_pri, svr_pub_key_bin);
   crypt_ = std::make_unique<crypt::AESCrypt>(shared_secret);
   // 初始化compress_
   compress_ = std::make_unique<compress::ZstdCompression>();
@@ -35,8 +33,7 @@ EffectiveSink::EffectiveSink(Conf conf) : conf_(conf) {
   slave_cache_ = std::make_unique<mmap::MMapper>(conf_.dir / "slave_cache");
   // 创建mmap失败
   if (!master_cache_ || !slave_cache_) {
-    throw std::runtime_error(
-        "EffectiveSink::EffectiveSink: create mmap failed");
+    throw std::runtime_error("EffectiveSink::EffectiveSink: create mmap failed");
   }
   //
   if (!slave_cache_->Empty()) {
@@ -53,8 +50,7 @@ EffectiveSink::EffectiveSink(Conf conf) : conf_(conf) {
     PrepareToFile_();
   }
   // 按时重复日志淘汰检查的任务
-  POST_REPEATED_TASK(
-      task_runner_, [this]() { ElimateFiles_(); }, conf_.interval, -1);
+  POST_REPEATED_TASK(task_runner_, [this]() { ElimateFiles_(); }, conf_.interval, -1);
 }
 
 void EffectiveSink::Log(const LogMsg& msg) {
@@ -74,8 +70,7 @@ void EffectiveSink::Log(const LogMsg& msg) {
     compressed_buf_.reserve(compress_->CompressedBound(buf.size()));
     // 压缩并得到压缩后大小
     size_t compressed_size =
-        compress_->Compress(buf.data(), buf.size(), compressed_buf_.data(),
-                            compressed_buf_.capacity());
+        compress_->Compress(buf.data(), buf.size(), compressed_buf_.data(), compressed_buf_.capacity());
     if (compressed_size == 0) {
       LOG_ERROR("EffectiveSink::Log: compress failed");
       return;
@@ -102,8 +97,7 @@ void EffectiveSink::Log(const LogMsg& msg) {
     PrepareToFile_();
   }
 }
-void EffectiveSink::SetFormatter(
-    std::unique_ptr<formatter::Formatter> formatter) {}
+void EffectiveSink::SetFormatter(std::unique_ptr<formatter::Formatter> formatter) {}
 
 void EffectiveSink::Flush() {
   // 主从都刷新
@@ -162,8 +156,7 @@ void EffectiveSink::CacheToFile_() {
     detail::ChunkHeader chunk_header;
     chunk_header.size = slave_cache_->Size();
     // copy公钥
-    memcpy(chunk_header.pub_key, client_pub_key_.data(),
-           client_pub_key_.size());
+    memcpy(chunk_header.pub_key, client_pub_key_.data(), client_pub_key_.size());
     // write header and slave data to file use append mode
     // 写入头部和数据通过文件追加模式
     std::ofstream ofs(file_path, std::ios::binary | std::ios::app);

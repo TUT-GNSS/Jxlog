@@ -18,8 +18,7 @@ class AESCrypt final : public Crypt {
   static std::string GenerateIV();
 
   // 加密数据
-  void Encrypt(const void* input, size_t input_size,
-               std::string& output) override;
+  void Encrypt(const void* input, size_t input_size, std::string& output) override;
 
   // 解密数据
   std::string Decrypt(const void* data, size_t size) override;

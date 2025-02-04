@@ -9,13 +9,11 @@ namespace logger {
 
 class TimerCount {
  public:
-  TimerCount(std::string_view info)
-      : info_(info), start_(std::chrono::steady_clock::now()) {}
+  TimerCount(std::string_view info) : info_(info), start_(std::chrono::steady_clock::now()) {}
 
   ~TimerCount() {
     auto end = std::chrono::steady_clock::now();
-    auto diff =
-        std::chrono::duration_cast<std::chrono::microseconds>(end - start_);
+    auto diff = std::chrono::duration_cast<std::chrono::microseconds>(end - start_);
   }
 
  private:

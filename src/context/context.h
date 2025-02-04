@@ -38,11 +38,9 @@ class Context {
 
 #define POST_TASK(runner_tag, task) EXECUTOR->PostTask(runner_tag, task)
 
-#define POST_DELAY_TASK(runner_tag, task, delay_time) \
-  EXECUTOR->PostDelayedTask(runner_tag, task, delay_time)
+#define POST_DELAY_TASK(runner_tag, task, delay_time) EXECUTOR->PostDelayedTask(runner_tag, task, delay_time)
 
 #define POST_REPEATED_TASK(runner_tag, task, delay_time, repeat_num) \
   EXECUTOR->PostRepeatedTask(runner_tag, task, delay_time, repeat_num)
 
-#define WAIT_TASK_IDLE(runner_tag) \
-  EXECUTOR->PostTaskAndGetResult(runner_tag, []() {})->wait()
+#define WAIT_TASK_IDLE(runner_tag) EXECUTOR->PostTaskAndGetResult(runner_tag, []() {})->wait()

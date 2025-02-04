@@ -18,10 +18,7 @@ namespace context {
 
 class ThreadPool {
  public:
-  explicit ThreadPool(uint32_t thread_count)
-      : is_available_(false),
-        is_shutdown_(false),
-        thread_count_(thread_count) {}
+  explicit ThreadPool(uint32_t thread_count) : is_available_(false), is_shutdown_(false), thread_count_(thread_count) {}
   ThreadPool(const ThreadPool& other) = delete;
   ThreadPool& operator=(const ThreadPool& other) = delete;
 
@@ -44,8 +41,7 @@ class ThreadPool {
 
   // 运行有返回值任务
   template <typename T, typename... Args>
-  auto RunRetTask(T&& func, Args&&... args)
-      -> std::shared_ptr<std::future<std::result_of_t<T(Args...)>>> {
+  auto RunRetTask(T&& func, Args&&... args) -> std::shared_ptr<std::future<std::result_of_t<T(Args...)>>> {
     if (is_shutdown_.load() || !is_available_.load()) {
       return nullptr;
     }

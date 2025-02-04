@@ -1,0 +1,14 @@
+# 忽略 build 目录
+src/build
+
+# 忽略 src.code-workspace 文件
+src/src.code-workspace
+
+# 忽略 .vscode
+.vscode
+src/.vscode
+
+# 忽略test
+src/test.cpp
+
+.DS_Store

@@ -27,20 +27,17 @@ ZstdCompression::~ZstdCompression() {
   }
 }
 
-size_t ZstdCompression::Compress(const void* input, size_t input_size,
-                                 void* output, size_t output_size) {
+size_t ZstdCompression::Compress(const void* input, size_t input_size, void* output, size_t output_size) {
   if (!input || input_size == 0) {
     return 0;
   }
 
   // 初始化输入和输出缓冲区
   ZSTD_inBuffer input_buffer = {input, input_size, 0};
-  ZSTD_outBuffer output_buffer = {
-      const_cast<void*>(reinterpret_cast<const void*>(output)), output_size, 0};
+  ZSTD_outBuffer output_buffer = {const_cast<void*>(reinterpret_cast<const void*>(output)), output_size, 0};
 
   // 调用 ZSTD_compressStream2 进行压缩
-  size_t ret =
-      ZSTD_compressStream2(cctx_, &output_buffer, &input_buffer, ZSTD_e_flush);
+  size_t ret = ZSTD_compressStream2(cctx_, &output_buffer, &input_buffer, ZSTD_e_flush);
 
   // 检查是否发生错误
   if (ZSTD_isError(ret) != 0) {
@@ -69,13 +66,11 @@ static bool IsZSTDCompressed(const void* input, size_t input_size) {
 
   // 检查输入数据的头部是否匹配 ZSTD 的魔数
   // memcp 如果两个内存区域的内容相同，返回 0；否则返回非零值
-  if (memcmp(input, kMagicNumberBigEndian, sizeof(kMagicNumberBigEndian)) ==
-      0) {
+  if (memcmp(input, kMagicNumberBigEndian, sizeof(kMagicNumberBigEndian)) == 0) {
     return true;
   }
 
-  if (memcmp(input, kMagicNumberLittleEndian,
-             sizeof(kMagicNumberLittleEndian)) == 0) {
+  if (memcmp(input, kMagicNumberLittleEndian, sizeof(kMagicNumberLittleEndian)) == 0) {
     return true;
   }
 
@@ -100,9 +95,8 @@ std::string ZstdCompression::Uncompress(const void* data, size_t size) {
 
   // 初始化输入和输出缓冲区
   ZSTD_inBuffer input = {data, size, 0};
-  ZSTD_outBuffer output_buffer = {
-      const_cast<void*>(reinterpret_cast<const void*>(output.data())),
-      output.capacity(), 0};
+  ZSTD_outBuffer output_buffer = {const_cast<void*>(reinterpret_cast<const void*>(output.data())), output.capacity(),
+                                  0};
 
   // 调用 ZSTD_decompressStream 进行解压缩
   size_t ret = ZSTD_decompressStream(dctx_, &output_buffer, &input);
@@ -113,8 +107,7 @@ std::string ZstdCompression::Uncompress(const void* data, size_t size) {
   }
 
   // 返回解压缩后的数据
-  output = std::string(reinterpret_cast<char*>(output_buffer.dst),
-                       output_buffer.pos);
+  output = std::string(reinterpret_cast<char*>(output_buffer.dst), output_buffer.pos);
   return output;
 }
 

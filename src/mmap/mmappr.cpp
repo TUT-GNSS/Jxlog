@@ -9,8 +9,7 @@ namespace mmap {
 
 static constexpr size_t kDefaultCapacity = 512 * 1024;  // 512KB
 
-MMapper::MMapper(FilePath file_path)
-    : file_path_(file_path), mmaped_address_(nullptr), capacity_(0) {
+MMapper::MMapper(FilePath file_path) : file_path_(file_path), mmaped_address_(nullptr), capacity_(0) {
   size_t file_size = logger::filesystem::GetFileSize(file_path);
   Reserve_(std::max(file_size, kDefaultCapacity));
   Init_();
