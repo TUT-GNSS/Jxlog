@@ -1,89 +1,140 @@
 #include "crypt/aes_crypt.h"
-#include "cryptopp/aes.h"
-#include "cryptopp/base64.h"
-#include "cryptopp/cryptlib.h"
-#include "cryptopp/eccrypto.h"
-#include "cryptopp/filters.h"
-#include "cryptopp/hex.h"
-#include "cryptopp/modes.h"
-#include "cryptopp/oids.h"
-#include "cryptopp/osrng.h"
+#include <openssl/evp.h>
+#include <openssl/rand.h>
+#include <stdexcept>
+#include <string>
+#include <vector>
 
 namespace logger {
 namespace crypt {
 
-// detail命名空间，用于封装AES加密和解密的具体实现细节
-namespace detail {
-using CryptoPP::byte;
-
-// 生成AES密钥，使用Crypto++库的AutoSeededRandomPool生成随机密钥
-static std::string GenerateKey() {
-  CryptoPP::AutoSeededRandomPool rnd;
-  byte key[CryptoPP::AES::DEFAULT_KEYLENGTH];
-  rnd.GenerateBlock(key, sizeof(key));
-  // 将生成的密钥转换为十六进制字符串并返回
-  return BinaryKeyToHex(std::string(reinterpret_cast<const char*>(key), sizeof(key)));
-}
-
-// 生成初始化向量（IV），使用Crypto++库的AutoSeededRandomPool生成随机IV
-static std::string GenerateIV() {
-  CryptoPP::AutoSeededRandomPool rnd;
-  byte iv[CryptoPP::AES::BLOCKSIZE];
-  rnd.GenerateBlock(iv, sizeof(iv));
-  // 将生成的IV转换为十六进制字符串并返回
-  return BinaryKeyToHex(std::string(reinterpret_cast<const char*>(iv), sizeof(iv)));
-}
-
-// 加密函数，使用AES和CBC模式进行加密
-void Encrypt(const void* input, size_t input_size, std::string& output, const std::string& key, const std::string& iv) {
-  // 创建AES加密对象
-  CryptoPP::AES::Encryption aes_encryption(reinterpret_cast<const byte*>(key.data()), key.size());
-  // 创建CBC模式加密对象
-  CryptoPP::CBC_Mode_ExternalCipher::Encryption cbc_encryption(aes_encryption,
-                                                               reinterpret_cast<const byte*>(iv.data()));
-  // 创建加密流变换过滤器，并将加密后的数据输出到字符串
-  CryptoPP::StreamTransformationFilter stf_encryptor(cbc_encryption, new CryptoPP::StringSink(output));
-  stf_encryptor.Put(reinterpret_cast<const byte*>(input), input_size);
-  stf_encryptor.MessageEnd();
-}
-
-// 解密函数，使用AES和CBC模式进行解密
-static std::string Decrypt(const void* data, size_t size, const std::string& key, const std::string& iv) {
-  std::string decryptedtext;
-  // 创建AES解密对象
-  CryptoPP::AES::Decryption aes_decryption(reinterpret_cast<const byte*>(key.data()), key.size());
-  // 创建CBC模式解密对象
-  CryptoPP::CBC_Mode_ExternalCipher::Decryption cbc_decryption(aes_decryption,
-                                                               reinterpret_cast<const byte*>(iv.data()));
-
-  // 创建解密流变换过滤器，并将解密后的数据输出到字符串
-  CryptoPP::StreamTransformationFilter stf_decryptor(cbc_decryption, new CryptoPP::StringSink(decryptedtext));
-  stf_decryptor.Put(reinterpret_cast<const byte*>(data), size);
-  stf_decryptor.MessageEnd();
-  return decryptedtext;
-}
-}  // namespace detail
-
-// 初始化密钥和IV
-AESCrypt::AESCrypt(std::string key) {
-  key_ = std::move(key);
-  iv_ = "dad0c0012340080a";  // 这里硬编码了一个IV，实际应用中应随机生成
-}
-
-void AESCrypt::Encrypt(const void* input, size_t input_size, std::string& output) {
-  detail::Encrypt(input, input_size, output, key_, iv_);
-}
-
-std::string AESCrypt::Decrypt(const void* data, size_t size) {
-  return detail::Decrypt(data, size, key_, iv_);
+AESCrypt::AESCrypt(std::string key) : key_(std::move(key)) {
+    if (key_.size() != 16 && key_.size() != 24 && key_.size() != 32) {
+        throw std::invalid_argument("AES key must be 16, 24, or 32 bytes long");
+    }
+    iv_ = GenerateIV(); // 生成一个随机的初始化向量
 }
 
 std::string AESCrypt::GenerateKey() {
-  return detail::GenerateKey();
+    std::string key(32, 0); // 默认生成 256 位（32 字节）的密钥
+    if (!RAND_bytes(reinterpret_cast<unsigned char*>(&key[0]), key.size())) {
+        throw std::runtime_error("Failed to generate AES key");
+    }
+    return key;
 }
 
 std::string AESCrypt::GenerateIV() {
-  return detail::GenerateIV();
+    std::string iv(16, 0); // AES 的 IV 固定为 16 字节
+    if (!RAND_bytes(reinterpret_cast<unsigned char*>(&iv[0]), iv.size())) {
+        throw std::runtime_error("Failed to generate AES IV");
+    }
+    return iv;
+}
+
+void AESCrypt::Encrypt(const void* input, size_t input_size, std::string& output) {
+    EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
+    if (!ctx) {
+        throw std::runtime_error("Failed to create EVP cipher context");
+    }
+
+    // 根据密钥长度选择 AES 模式
+    const EVP_CIPHER* cipher = nullptr;
+    if (key_.size() == 16) {
+        cipher = EVP_aes_128_cbc();
+    } else if (key_.size() == 24) {
+        cipher = EVP_aes_192_cbc();
+    } else if (key_.size() == 32) {
+        cipher = EVP_aes_256_cbc();
+    } else {
+        EVP_CIPHER_CTX_free(ctx);
+        throw std::runtime_error("Invalid AES key size");
+    }
+
+    // 初始化加密操作
+    if (1 != EVP_EncryptInit_ex(ctx, cipher, nullptr,
+                                reinterpret_cast<const unsigned char*>(key_.data()),
+                                reinterpret_cast<const unsigned char*>(iv_.data()))) {
+        EVP_CIPHER_CTX_free(ctx);
+        throw std::runtime_error("Failed to initialize encryption");
+    }
+
+    // 计算输出缓冲区大小
+    int block_size = EVP_CIPHER_CTX_block_size(ctx);
+    std::vector<unsigned char> output_buffer(input_size + block_size);
+    int output_len = 0;
+
+    // 执行加密
+    if (1 != EVP_EncryptUpdate(ctx, output_buffer.data(), &output_len,
+                               reinterpret_cast<const unsigned char*>(input), input_size)) {
+        EVP_CIPHER_CTX_free(ctx);
+        throw std::runtime_error("Failed to encrypt data");
+    }
+
+    // 结束加密
+    int final_len = 0;
+    if (1 != EVP_EncryptFinal_ex(ctx, output_buffer.data() + output_len, &final_len)) {
+        EVP_CIPHER_CTX_free(ctx);
+        throw std::runtime_error("Failed to finalize encryption");
+    }
+    output_len += final_len;
+
+    // 将加密结果存储到 output 中
+    output.assign(reinterpret_cast<char*>(output_buffer.data()), output_len);
+
+    EVP_CIPHER_CTX_free(ctx);
+}
+
+std::string AESCrypt::Decrypt(const void* data, size_t size) {
+    EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
+    if (!ctx) {
+        throw std::runtime_error("Failed to create EVP cipher context");
+    }
+
+    // 根据密钥长度选择 AES 模式
+    const EVP_CIPHER* cipher = nullptr;
+    if (key_.size() == 16) {
+        cipher = EVP_aes_128_cbc();
+    } else if (key_.size() == 24) {
+        cipher = EVP_aes_192_cbc();
+    } else if (key_.size() == 32) {
+        cipher = EVP_aes_256_cbc();
+    } else {
+        EVP_CIPHER_CTX_free(ctx);
+        throw std::runtime_error("Invalid AES key size");
+    }
+
+    // 初始化解密操作
+    if (1 != EVP_DecryptInit_ex(ctx, cipher, nullptr,
+                                reinterpret_cast<const unsigned char*>(key_.data()),
+                                reinterpret_cast<const unsigned char*>(iv_.data()))) {
+        EVP_CIPHER_CTX_free(ctx);
+        throw std::runtime_error("Failed to initialize decryption");
+    }
+
+    // 计算输出缓冲区大小
+    std::vector<unsigned char> output_buffer(size);
+    int output_len = 0;
+
+    // 执行解密
+    if (1 != EVP_DecryptUpdate(ctx, output_buffer.data(), &output_len,
+                               reinterpret_cast<const unsigned char*>(data), size)) {
+        EVP_CIPHER_CTX_free(ctx);
+        throw std::runtime_error("Failed to decrypt data");
+    }
+
+    // 结束解密
+    int final_len = 0;
+    if (1 != EVP_DecryptFinal_ex(ctx, output_buffer.data() + output_len, &final_len)) {
+        EVP_CIPHER_CTX_free(ctx);
+        throw std::runtime_error("Failed to finalize decryption");
+    }
+    output_len += final_len;
+
+    // 将解密结果存储到字符串中
+    std::string result(reinterpret_cast<char*>(output_buffer.data()), output_len);
+
+    EVP_CIPHER_CTX_free(ctx);
+    return result;
 }
 
 }  // namespace crypt

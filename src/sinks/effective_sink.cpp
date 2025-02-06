@@ -25,8 +25,10 @@ EffectiveSink::EffectiveSink(Conf conf) : conf_(conf) {
   auto client_pri = std::get<0>(ecdh_key);
   client_pub_key_ = std::get<1>(ecdh_key);
   LOG_INFO("EffectiveSink: client pub size {}", client_pub_key_.size());
-  std::string svr_pub_key_bin = crypt::HexKeyToBinary(conf_.pub_key);
+  // std::string svr_pub_key_bin = crypt::HexKeyToBinary(conf_.pub_key);
+  std::string svr_pub_key_bin = conf_.pub_key;
   std::string shared_secret = crypt::GenECDHSharedSecret(client_pri, svr_pub_key_bin);
+  LOG_INFO("shared_secret没报错 size:{}",shared_secret.size());
   crypt_ = std::make_unique<crypt::AESCrypt>(shared_secret);
   // 初始化compress_
   compress_ = std::make_unique<compress::ZstdCompression>();
