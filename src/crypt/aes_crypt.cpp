@@ -5,12 +5,14 @@
 #include <string>
 #include <vector>
 
+#include "helpers/internal_log.h"
+
 namespace logger {
 namespace crypt {
 
 AESCrypt::AESCrypt(std::string key) : key_(std::move(key)) {
     if (key_.size() != 16 && key_.size() != 24 && key_.size() != 32) {
-        throw std::invalid_argument("AES key must be 16, 24, or 32 bytes long");
+      LOG_ERROR("AES key must be 16, 24, or 32 bytes long");
     }
     iv_ = GenerateIV(); // 生成一个随机的初始化向量
 }
@@ -18,7 +20,8 @@ AESCrypt::AESCrypt(std::string key) : key_(std::move(key)) {
 std::string AESCrypt::GenerateKey() {
     std::string key(32, 0); // 默认生成 256 位（32 字节）的密钥
     if (!RAND_bytes(reinterpret_cast<unsigned char*>(&key[0]), key.size())) {
-        throw std::runtime_error("Failed to generate AES key");
+      LOG_ERROR("Failed to generate AES key");
+      return "";
     }
     return key;
 }
@@ -26,7 +29,8 @@ std::string AESCrypt::GenerateKey() {
 std::string AESCrypt::GenerateIV() {
     std::string iv(16, 0); // AES 的 IV 固定为 16 字节
     if (!RAND_bytes(reinterpret_cast<unsigned char*>(&iv[0]), iv.size())) {
-        throw std::runtime_error("Failed to generate AES IV");
+      LOG_ERROR("Failed to generate AES IV");
+      return "";
     }
     return iv;
 }
@@ -34,7 +38,8 @@ std::string AESCrypt::GenerateIV() {
 void AESCrypt::Encrypt(const void* input, size_t input_size, std::string& output) {
     EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
     if (!ctx) {
-        throw std::runtime_error("Failed to create EVP cipher context");
+      LOG_ERROR("Failed to create EVP cipher context");
+      return;
     }
 
     // 根据密钥长度选择 AES 模式
@@ -47,15 +52,17 @@ void AESCrypt::Encrypt(const void* input, size_t input_size, std::string& output
         cipher = EVP_aes_256_cbc();
     } else {
         EVP_CIPHER_CTX_free(ctx);
-        throw std::runtime_error("Invalid AES key size");
+        LOG_ERROR("Invalid AES key size");
+        return;
     }
 
     // 初始化加密操作
-    if (1 != EVP_EncryptInit_ex(ctx, cipher, nullptr,
+    if (!EVP_EncryptInit_ex(ctx, cipher, nullptr,
                                 reinterpret_cast<const unsigned char*>(key_.data()),
                                 reinterpret_cast<const unsigned char*>(iv_.data()))) {
         EVP_CIPHER_CTX_free(ctx);
-        throw std::runtime_error("Failed to initialize encryption");
+        LOG_ERROR("Failed to initialize encryption");
+        return;
     }
 
     // 计算输出缓冲区大小
@@ -64,17 +71,19 @@ void AESCrypt::Encrypt(const void* input, size_t input_size, std::string& output
     int output_len = 0;
 
     // 执行加密
-    if (1 != EVP_EncryptUpdate(ctx, output_buffer.data(), &output_len,
+    if (!EVP_EncryptUpdate(ctx, output_buffer.data(), &output_len,
                                reinterpret_cast<const unsigned char*>(input), input_size)) {
         EVP_CIPHER_CTX_free(ctx);
-        throw std::runtime_error("Failed to encrypt data");
+        LOG_ERROR("Failed to encrypt data");
+        return;
     }
 
     // 结束加密
     int final_len = 0;
-    if (1 != EVP_EncryptFinal_ex(ctx, output_buffer.data() + output_len, &final_len)) {
+    if (!EVP_EncryptFinal_ex(ctx, output_buffer.data() + output_len, &final_len)) {
         EVP_CIPHER_CTX_free(ctx);
-        throw std::runtime_error("Failed to finalize encryption");
+        LOG_ERROR("Failed to finalize encryption");
+        return;
     }
     output_len += final_len;
 
@@ -87,7 +96,8 @@ void AESCrypt::Encrypt(const void* input, size_t input_size, std::string& output
 std::string AESCrypt::Decrypt(const void* data, size_t size) {
     EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
     if (!ctx) {
-        throw std::runtime_error("Failed to create EVP cipher context");
+        LOG_ERROR("Failed to create EVP cipher context");
+        return "";
     }
 
     // 根据密钥长度选择 AES 模式
@@ -100,15 +110,17 @@ std::string AESCrypt::Decrypt(const void* data, size_t size) {
         cipher = EVP_aes_256_cbc();
     } else {
         EVP_CIPHER_CTX_free(ctx);
-        throw std::runtime_error("Invalid AES key size");
+        LOG_ERROR("Invalid AES key size");
+        return "";
     }
 
     // 初始化解密操作
-    if (1 != EVP_DecryptInit_ex(ctx, cipher, nullptr,
+    if (!EVP_DecryptInit_ex(ctx, cipher, nullptr,
                                 reinterpret_cast<const unsigned char*>(key_.data()),
                                 reinterpret_cast<const unsigned char*>(iv_.data()))) {
         EVP_CIPHER_CTX_free(ctx);
-        throw std::runtime_error("Failed to initialize decryption");
+        LOG_ERROR("Failed to initialize decryption");
+        return "";
     }
 
     // 计算输出缓冲区大小
@@ -116,17 +128,19 @@ std::string AESCrypt::Decrypt(const void* data, size_t size) {
     int output_len = 0;
 
     // 执行解密
-    if (1 != EVP_DecryptUpdate(ctx, output_buffer.data(), &output_len,
+    if (!EVP_DecryptUpdate(ctx, output_buffer.data(), &output_len,
                                reinterpret_cast<const unsigned char*>(data), size)) {
         EVP_CIPHER_CTX_free(ctx);
-        throw std::runtime_error("Failed to decrypt data");
+        LOG_ERROR("Failed to decrypt data");
+        return "";
     }
 
     // 结束解密
     int final_len = 0;
-    if (1 != EVP_DecryptFinal_ex(ctx, output_buffer.data() + output_len, &final_len)) {
+    if (!EVP_DecryptFinal_ex(ctx, output_buffer.data() + output_len, &final_len)) {
         EVP_CIPHER_CTX_free(ctx);
-        throw std::runtime_error("Failed to finalize decryption");
+        LOG_ERROR("Failed to finalize decryption");
+        return "";
     }
     output_len += final_len;
 

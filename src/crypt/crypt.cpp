@@ -11,6 +11,8 @@
 #include <iomanip>
 #include <sstream>
 
+#include "helpers/internal_log.h"
+
 namespace logger {
 namespace crypt {
 
@@ -19,7 +21,8 @@ std::tuple<std::string, std::string> GenECDHKey() {
     EC_KEY *key = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
     if (!key || !EC_KEY_generate_key(key)) {
         EC_KEY_free(key);
-        throw std::runtime_error("Failed to generate ECDH key pair");
+        LOG_ERROR("Failed to generate ECDH key pair");
+        return std::make_tuple("","");
     }
 
     // 获取私钥
@@ -40,7 +43,8 @@ std::tuple<std::string, std::string> GenECDHKey() {
 std::string GenECDHSharedSecret(const std::string& client_pri, const std::string& server_pub) {
     EC_KEY *key = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
     if (!key) {
-        throw std::runtime_error("Failed to create EC key");
+        LOG_ERROR("Failed to create EC key");
+        return "";
     }
 
     // 设置私钥
@@ -48,7 +52,8 @@ std::string GenECDHSharedSecret(const std::string& client_pri, const std::string
     if (!EC_KEY_set_private_key(key, priv_key)) {
         BN_free(priv_key);
         EC_KEY_free(key);
-        throw std::runtime_error("Failed to set private key");
+        LOG_ERROR("Failed to set private key");
+        return "";
     }
     BN_free(priv_key);
 
@@ -57,7 +62,8 @@ std::string GenECDHSharedSecret(const std::string& client_pri, const std::string
     if (!EC_POINT_oct2point(EC_KEY_get0_group(key), pub_key, reinterpret_cast<const unsigned char*>(server_pub.data()), server_pub.size(), nullptr)) {
         EC_POINT_free(pub_key);
         EC_KEY_free(key);
-        throw std::runtime_error("Failed to set public key");
+        LOG_ERROR("Failed to set public key");
+        return "";
     }
 
     // 计算共享密钥
@@ -67,7 +73,8 @@ std::string GenECDHSharedSecret(const std::string& client_pri, const std::string
     if (secret_len <= 0) {
         EC_POINT_free(pub_key);
         EC_KEY_free(key);
-        throw std::runtime_error("Failed to compute shared secret");
+        LOG_ERROR("Failed to compute shared secret");
+        return "";
     }
 
     EC_POINT_free(pub_key);
