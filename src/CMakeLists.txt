@@ -42,6 +42,7 @@ endif()
 
 set(SRCS
     logger.cpp
+    log_factory.cpp
     ${FORMATTER_SRCS}
     ${SINK_SRCS}
     ${MMAP_SRCS}
