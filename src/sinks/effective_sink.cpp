@@ -25,10 +25,10 @@ EffectiveSink::EffectiveSink(Conf conf) : conf_(conf) {
   auto client_pri = std::get<0>(ecdh_key);
   client_pub_key_ = std::get<1>(ecdh_key);
   LOG_INFO("EffectiveSink: client pub size {}", client_pub_key_.size());
-  // std::string svr_pub_key_bin = crypt::HexKeyToBinary(conf_.pub_key);
-  std::string svr_pub_key_bin = conf_.pub_key;
+  std::string svr_pub_key_bin = crypt::HexKeyToBinary(conf_.pub_key);
+  // std::string svr_pub_key_bin = conf_.pub_key;
   std::string shared_secret = crypt::GenECDHSharedSecret(client_pri, svr_pub_key_bin);
-  LOG_INFO("shared_secret没报错 size:{}",shared_secret.size());
+  LOG_INFO("shared_secret: {}",crypt::BinaryKeyToHex(shared_secret));
   crypt_ = std::make_unique<crypt::AESCrypt>(shared_secret);
   // 初始化compress_
   compress_ = std::make_unique<compress::ZstdCompression>();
@@ -75,6 +75,7 @@ void EffectiveSink::Log(const LogMsg& msg) {
     // 压缩并得到压缩后大小
     size_t compressed_size =
         compress_->Compress(buf.data(), buf.size(), compressed_buf_.data(), compressed_buf_.capacity());
+    // std::cout<<"压缩后size: "<<compressed_size<<"\n";
     if (compressed_size == 0) {
       LOG_ERROR("EffectiveSink::Log: compress failed");
       return;
@@ -140,7 +141,7 @@ void EffectiveSink::WriteToCache_(const void* data, uint32_t size) {
 
 void EffectiveSink::PrepareToFile_() {
   // 将任务发布出去
-  POST_TASK(task_runner_, [this]() { CacheToFile_();});
+  POST_TASK(task_runner_, [this]() {  CacheToFile_();});
 }
 
 void EffectiveSink::CacheToFile_() {
@@ -165,6 +166,7 @@ void EffectiveSink::CacheToFile_() {
     std::ofstream ofs(file_path, std::ios::binary | std::ios::app);
     ofs.write(reinterpret_cast<char*>(&chunk_header), sizeof(chunk_header));
     ofs.write(reinterpret_cast<char*>(slave_cache_->Data()), chunk_header.size);
+    ofs.close();
   }
   // 清空从缓冲区,设置从缓冲区空闲
   slave_cache_->Clear();
@@ -188,8 +190,9 @@ std::filesystem::path EffectiveSink::GetFilePath_() {
   } else {
     // 获取文件大小
     auto file_size = filesystem::GetFileSize(log_file_path_);
+    bytes single_bytes = space_cast<bytes>(conf_.single_size);
     // 文件大小超过单个文件最大值 创建新文件 否则继续用之前log_file_path_
-    if (file_size > conf_.single_size.count()) {
+    if (file_size > single_bytes.count()) {
       std::string date_time_path = GetDateTimePath().string();
       std::string file_path = date_time_path + ".log";
       // 同名文件 加索引号区分

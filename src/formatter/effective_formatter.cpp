@@ -1,5 +1,5 @@
 #include "formatter/effective_formatter.h"
-#include "proto/effective_msg.pb.h"
+#include "effective_msg.pb.h"
 
 namespace logger {
 namespace formatter {

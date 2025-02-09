@@ -16,6 +16,8 @@ class MMapper {
   MMapper(const MMapper& other) = delete;
   MMapper& operator=(MMapper other) = delete;
 
+  void Resize(size_t new_size);
+
   uint8_t* Data() const;
 
   size_t Size() const;

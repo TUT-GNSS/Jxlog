@@ -18,7 +18,7 @@ AESCrypt::AESCrypt(std::string key) : key_(std::move(key)) {
 }
 
 std::string AESCrypt::GenerateKey() {
-    std::string key(32, 0); // 默认生成 256 位（32 字节）的密钥
+    std::string key(16, 0); // 默认生成 128 位（16 字节）的密钥
     if (!RAND_bytes(reinterpret_cast<unsigned char*>(&key[0]), key.size())) {
       LOG_ERROR("Failed to generate AES key");
       return "";

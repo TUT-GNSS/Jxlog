@@ -54,27 +54,29 @@ set(SRCS
 )
 
 
-add_executable(logger test.cpp ${SRCS}) # 生成可执行文件，这里程序名即为功能名
+# add_executable(logger test.cpp ${SRCS}) # 生成可执行文件，这里程序名即为功能名
+message(STATUS "libs ${LIBS}")
 
+add_library(logger STATIC ${SRCS})
 
 find_package(GTest REQUIRED)
-target_link_libraries(logger PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+target_link_libraries(logger PUBLIC GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 
 find_package(fmt CONFIG REQUIRED)
-target_link_libraries(logger PRIVATE fmt::fmt)
+target_link_libraries(logger PUBLIC fmt::fmt)
 
 find_package(ZLIB REQUIRED)
-target_link_libraries(logger PRIVATE ZLIB::ZLIB)
+target_link_libraries(logger PUBLIC ZLIB::ZLIB)
 
 find_package(zstd CONFIG REQUIRED)
-target_link_libraries(logger PRIVATE zstd::libzstd)
+target_link_libraries(logger PUBLIC zstd::libzstd)
 
 find_package(OpenSSL REQUIRED)
-target_link_libraries(logger PRIVATE OpenSSL::SSL)
-target_link_libraries(logger PRIVATE OpenSSL::Crypto)
+target_link_libraries(logger PUBLIC OpenSSL::SSL)
+target_link_libraries(logger PUBLIC OpenSSL::Crypto)
 
 find_package(cryptopp CONFIG REQUIRED)
-target_link_libraries(logger PRIVATE cryptopp::cryptopp)
+target_link_libraries(logger PUBLIC cryptopp::cryptopp)
 
 find_package(protobuf CONFIG REQUIRED)
-target_link_libraries(logger PRIVATE protobuf::libprotoc protobuf::libprotobuf protobuf::libprotobuf-lite)
+target_link_libraries(logger PUBLIC protobuf::libprotoc protobuf::libprotobuf protobuf::libprotobuf-lite)

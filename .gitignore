@@ -1,5 +1,8 @@
 # 忽略 build 目录
 src/build
+build
+decode/build
+
 
 # 忽略 src.code-workspace 文件
 src/src.code-workspace

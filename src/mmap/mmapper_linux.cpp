@@ -18,11 +18,11 @@ void MMapper::Unmap_() {
   if (mmaped_address_) {
     munmap(mmaped_address_, capacity_);
   }
-  mmaped_address_ = nullptr;
+  mmaped_address_ = NULL;
 }
 
 bool MMapper::TryMap_(size_t capacity) {
-  int fd = open(file_path_.string().data(), O_RDWR | O_CREAT, S_IRWXU);
+  int fd = open(file_path_.string().c_str(), O_RDWR | O_CREAT, S_IRWXU);
   LOG_DEFER {
     if (fd != -1) {
       close(fd);

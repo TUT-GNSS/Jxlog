@@ -9,10 +9,18 @@ namespace mmap {
 
 static constexpr size_t kDefaultCapacity = 512 * 1024;  // 512KB
 
-MMapper::MMapper(FilePath file_path) : file_path_(file_path), mmaped_address_(nullptr), capacity_(0) {
+MMapper::MMapper(FilePath file_path) : file_path_(std::move(file_path)), mmaped_address_(nullptr), capacity_(0) {
   size_t file_size = logger::filesystem::GetFileSize(file_path);
   Reserve_(std::max(file_size, kDefaultCapacity));
   Init_();
+}
+
+void MMapper::Resize(size_t new_size) {
+  if (!IsValid_()) {
+    return;
+  }
+  EnsureCapacity_(new_size);
+  GetHeader_()->size = new_size;
 }
 
 void MMapper::Reserve_(size_t new_capcity) {
@@ -96,7 +104,7 @@ void MMapper::Push(const void* data, size_t size) {
   size_t new_size = Size() + size;
   EnsureCapacity_(new_size);
   memcpy(Data() + Size(), data, size);
-  GetHeader_()->size += new_size;
+  GetHeader_()->size = new_size;
 }
 
 void MMapper::EnsureCapacity_(size_t new_size) {
@@ -105,11 +113,10 @@ void MMapper::EnsureCapacity_(size_t new_size) {
     return;
   }
   size_t new_capacity = capacity_;
-  size_t page_size = logger::utils::GetPageSize();
   // 以page_size整数倍扩容capacity
-  do {
-    new_capacity += page_size;
-  } while (new_capacity < real_size);
+  while(new_capacity < real_size){
+    new_capacity+=logger::utils::GetPageSize();
+  }
 
   Reserve_(new_capacity);
 }
@@ -118,7 +125,7 @@ double MMapper::GetRatio() const {
   if (!IsValid_()) {
     return 0.0;
   }
-  return static_cast<double>(Size()) / Capacity_() - sizeof(MmapHeader);
+  return static_cast<double>(Size()) / (Capacity_() - sizeof(MmapHeader));
 }
 
 }  // namespace mmap
