@@ -4,6 +4,7 @@
 #include <fstream>
 
 #include "compress/zstd_compress.h"
+#include "compress/zlib_compress.h"
 #include "crypt/aes_crypt.h"
 #include "formatter/effective_formatter.h"
 #include "utils/file_util.h"
@@ -75,7 +76,7 @@ void EffectiveSink::Log(const LogMsg& msg) {
     // 压缩并得到压缩后大小
     size_t compressed_size =
         compress_->Compress(buf.data(), buf.size(), compressed_buf_.data(), compressed_buf_.capacity());
-    // std::cout<<"压缩后size: "<<compressed_size<<"\n";
+
     if (compressed_size == 0) {
       LOG_ERROR("EffectiveSink::Log: compress failed");
       return;

@@ -26,8 +26,8 @@ class AESCrypt final : public Crypt {
  private:
   // 存储AES密钥
   std::string key_;
-  // 存储初始化向量（IV）
-  std::string iv_;
+  // // 存储初始化向量（IV）
+  // std::string iv_;
 };
 
 }  // namespace crypt

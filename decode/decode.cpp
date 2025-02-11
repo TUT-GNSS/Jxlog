@@ -8,6 +8,7 @@
 
 #include "decode_formatter.h"
 #include "src/compress/zstd_compress.h"
+#include "src/compress/zlib_compress.h"
 #include "src/crypt/aes_crypt.h"
 #include "src/helpers/internal_log.h"
 #include "src/sinks/effective_sink.h"
@@ -35,7 +36,7 @@ std::vector<char> ReadFile(const std::string& file_path) {
   // 重置文件指针到文件开头
   ifs.seekg(0, std::ios::beg);
   std::vector<char> buffer(file_size);
-  ifs.read(buffer.data(), static_cast<std::streamsize>(file_size));
+  ifs.read(buffer.data(), file_size);
   return buffer;
 }
 
