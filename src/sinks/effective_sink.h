@@ -7,7 +7,7 @@
 
 #include "compress/compress.h"
 #include "context/context.h"
-#include "crypt/crypt.h"
+#include "crypt/aes_crypt.h"
 #include "mmap/mmapper.h"
 #include "sinks/sink.h"
 #include "space.h"
@@ -20,6 +20,7 @@ struct ChunkHeader {
   uint64_t magic;
   uint64_t size;
   char pub_key[128];  // 公钥
+  char iv[16];
 
   ChunkHeader() : magic(kMagic), size(0) {}
 };
@@ -76,7 +77,7 @@ class EffectiveSink : public Sink {
   std::mutex mtx_;
   std::unique_ptr<formatter::Formatter> formatter_;
   context::TaskRunnerTag task_runner_;
-  std::unique_ptr<crypt::Crypt> crypt_;
+  std::unique_ptr<crypt::AESCrypt> crypt_;
   std::unique_ptr<compress::Compression> compress_;
   std::unique_ptr<mmap::MMapper> master_cache_;
   std::unique_ptr<mmap::MMapper> slave_cache_;
@@ -84,6 +85,7 @@ class EffectiveSink : public Sink {
   std::string client_pub_key_;
   std::string compressed_buf_;
   std::string encryped_buf_;
+  std::string aes_crypt_iv_;
   std::atomic<bool> is_slave_free_{true};
 };
 

@@ -125,6 +125,8 @@ void EffectiveSink::SwapCache_() {
   std::lock_guard<std::mutex> lock(mtx_);
   // 交换主从缓冲区指针
   std::swap(master_cache_, slave_cache_);
+  aes_crypt_iv_ = crypt_->GetIV();// 获取加密的iv
+  crypt_->GenerateIV();// 更新后续加密的iv
 }
 
 bool EffectiveSink::NeedCacheToFile_() {
@@ -163,6 +165,8 @@ void EffectiveSink::CacheToFile_() {
     chunk_header.size = slave_cache_->Size();
     // copy公钥
     memcpy(chunk_header.pub_key, client_pub_key_.data(), client_pub_key_.size());
+    // copy IV
+    memcpy(chunk_header.iv, aes_crypt_iv_.data(), aes_crypt_iv_.size());
     // 写入头部和数据通过文件追加模式
     std::ofstream ofs(file_path, std::ios::binary | std::ios::app);
     ofs.write(reinterpret_cast<char*>(&chunk_header), sizeof(chunk_header));

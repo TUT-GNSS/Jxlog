@@ -61,6 +61,7 @@ void DecodeChunkData(char* data,
                      size_t size,
                      const std::string& cli_pub_key,
                      const std::string& svr_pri_key,
+                     const std::string& iv,
                      std::string& output) {
   std::cout << "decode chunk :" << size << std::endl;
   // 服务器私钥
@@ -68,7 +69,10 @@ void DecodeChunkData(char* data,
   // 计算共享密钥
   std::string shared_secret = crypt::GenECDHSharedSecret(svr_pri_key_bin, cli_pub_key);
   // 创建解压缩对象
-  std::unique_ptr<crypt::Crypt> crypt = std::make_unique<crypt::AESCrypt>(shared_secret);
+  std::unique_ptr<crypt::AESCrypt> crypt = std::make_unique<crypt::AESCrypt>(shared_secret);
+  // 设置IV
+  crypt->SetIV(iv);
+
   size_t offset = 0;
   size_t count = 0;
   while (offset < size) {
@@ -117,7 +121,7 @@ void DecodeFile(const std::string& input_file_path, const std::string& pri_key, 
     output.clear();
     // 跳至数据
     offset += sizeof(ChunkHeader);
-    DecodeChunkData(input.data() + offset, chunk_header->size, std::string(chunk_header->pub_key, 65), pri_key, output);
+    DecodeChunkData(input.data() + offset, chunk_header->size, std::string(chunk_header->pub_key, 65), pri_key, chunk_header->iv, output);
     // 跳至下一ChunkHeader
     offset += chunk_header->size;
     // 数据输出到文件

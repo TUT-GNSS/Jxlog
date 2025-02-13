@@ -27,11 +27,11 @@ int main() {
   {
     std::shared_ptr<logger::sink::Sink> effective_sink = std::make_shared<logger::sink::EffectiveSink>(conf);
     logger::Logger handle("test", {effective_sink});
-    // std::string str = GenerateRandomString(2000);
+    std::string str = GenerateRandomString(2000);
 
     auto begin = std::chrono::system_clock::now();
-    for (int i = 0; i < 3; ++i) {
-      handle.Log(logger::LogLevel::kInfo, logger::SourceLocation(), "test hello Jxlog!");
+    for (int i = 0; i < 100000; ++i) {
+      handle.Log(logger::LogLevel::kInfo, logger::SourceLocation(), str);
     }
     effective_sink->Flush();
     auto end = std::chrono::system_clock::now();

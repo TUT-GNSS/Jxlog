@@ -12,10 +12,16 @@ class AESCrypt final : public Crypt {
   ~AESCrypt() override = default;
 
   // 用于生成一个新的AES密钥
-  static std::string GenerateKey();
+  std::string GenerateKey();
 
   // 用于生成一个新的初始化向量（IV）
-  static std::string GenerateIV();
+  std::string GenerateIV();
+
+  // 获取IV
+  std::string GetIV();
+
+  // 设置IV
+  void SetIV(std::string iv);
 
   // 加密数据
   void Encrypt(const void* input, size_t input_size, std::string& output) override;
@@ -26,8 +32,8 @@ class AESCrypt final : public Crypt {
  private:
   // 存储AES密钥
   std::string key_;
-  // // 存储初始化向量（IV）
-  // std::string iv_;
+  // 存储初始化向量（IV）
+  std::string iv_;
 };
 
 }  // namespace crypt
