@@ -30,8 +30,8 @@ int main() {
     std::string str = GenerateRandomString(2000);
 
     auto begin = std::chrono::system_clock::now();
-    for (int i = 0; i < 100000; ++i) {
-      handle.Log(logger::LogLevel::kInfo, logger::SourceLocation(), str);
+    for (int i = 0; i < 10; ++i) {
+      handle.Log(logger::LogLevel::kInfo, logger::SourceLocation(), " test! Hello Jxlog!!!");
     }
     effective_sink->Flush();
     auto end = std::chrono::system_clock::now();

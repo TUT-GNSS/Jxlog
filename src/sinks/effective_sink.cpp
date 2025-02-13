@@ -66,6 +66,14 @@ void EffectiveSink::Log(const LogMsg& msg) {
   // 如果主缓冲区空 重置压缩流
   if (master_cache_->Empty()) {
     compress_->ResetStream();
+    // 加入头部
+    detail::ChunkHeader chunk_header;
+    chunk_header.size = 0;//初始size
+    // copy公钥
+    memcpy(chunk_header.pub_key, client_pub_key_.data(), client_pub_key_.size());
+    // copy IV
+    memcpy(chunk_header.iv, crypt_->GetIV().data(), crypt_->GetIV().size());
+    master_cache_->Push(reinterpret_cast<char*>(&chunk_header), sizeof(chunk_header));
   }
   // 压缩 加密 写入master_cache_必须加锁
   {
@@ -125,8 +133,7 @@ void EffectiveSink::SwapCache_() {
   std::lock_guard<std::mutex> lock(mtx_);
   // 交换主从缓冲区指针
   std::swap(master_cache_, slave_cache_);
-  aes_crypt_iv_ = crypt_->GetIV();// 获取加密的iv
-  crypt_->GenerateIV();// 更新后续加密的iv
+  crypt_->GenerateIV();// 更新加密的iv
 }
 
 bool EffectiveSink::NeedCacheToFile_() {
@@ -140,9 +147,12 @@ void EffectiveSink::WriteToCache_(const void* data, uint32_t size) {
   item_header.size = size;
   master_cache_->Push(&item_header, sizeof(item_header));
   master_cache_->Push(data, size);
+  // 设置chunk size
+  reinterpret_cast<detail::ChunkHeader*>(master_cache_->Data())->size += (size+sizeof(item_header));
 }
 
 void EffectiveSink::PrepareToFile_() {
+  // throw std::runtime_error("test!"); // 模拟程序崩溃
   // 将任务发布出去
   POST_TASK(task_runner_, [this]() {  CacheToFile_();});
 }
@@ -160,17 +170,9 @@ void EffectiveSink::CacheToFile_() {
   // 从cache内容转移到日志文件中
   {
     auto file_path = GetFilePath_();
-    // 加入头部
-    detail::ChunkHeader chunk_header;
-    chunk_header.size = slave_cache_->Size();
-    // copy公钥
-    memcpy(chunk_header.pub_key, client_pub_key_.data(), client_pub_key_.size());
-    // copy IV
-    memcpy(chunk_header.iv, aes_crypt_iv_.data(), aes_crypt_iv_.size());
     // 写入头部和数据通过文件追加模式
     std::ofstream ofs(file_path, std::ios::binary | std::ios::app);
-    ofs.write(reinterpret_cast<char*>(&chunk_header), sizeof(chunk_header));
-    ofs.write(reinterpret_cast<char*>(slave_cache_->Data()), chunk_header.size);
+    ofs.write(reinterpret_cast<char*>(slave_cache_->Data()), slave_cache_->Size());
     ofs.close();
   }
   // 清空从缓冲区,设置从缓冲区空闲
