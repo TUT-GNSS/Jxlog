@@ -20,17 +20,17 @@ using SinkPtrInitList = std::initializer_list<SinkPtr>;
 
 class Logger {
  public:
-  explicit Logger(std::string name, SinkPtr sink);
-  explicit Logger(std::string name, SinkPtrInitList sinks);
+  explicit Logger(SinkPtr sink);
+  explicit Logger(SinkPtrInitList sinks);
   explicit Logger(Logger&& other) noexcept;
   Logger& operator=(Logger other) noexcept;
 
   // 根据存储sink的容器迭代器构造
   template <typename It>
-  Logger(std::string name, It begin, It end) : Logger(name, SinkPtrInitList(begin, end)) {}
+  Logger(It begin, It end) : Logger(SinkPtrInitList(begin, end)) {}
 
-  // 虚析构
-  ~Logger();
+  // 析构
+  virtual ~Logger() = default;
 
   // 禁用拷贝构造和赋值
   Logger(const Logger&) = delete;
@@ -42,14 +42,16 @@ class Logger {
 
   void Log(LogLevel level, SourceLocation loc, StringView message);
 
+  void Flush();
+
  protected:
   bool ShouldLog_(LogLevel level) const noexcept { return level >= level_ && !sinks_.empty(); }
 
   virtual void Log_(const LogMsg& msg);
 
-  // void sink_it_(const LogMsg &msg);
-  // virtual void flush_();
-  // bool should_flush_(const LogMsg &msg);
+  void Flush_();
+
+  bool ShouldFlush_() { return !sinks_.empty(); };
 
  private:
   std::string name_;

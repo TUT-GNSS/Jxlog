@@ -12,6 +12,8 @@ class VariadicLogger : public Logger {
  public:
   using Logger::Logger;
 
+  ~VariadicLogger() = default;
+
   template <typename... Args>
   void Log(SourceLocation loc, LogLevel lvl, fmt::format_string<Args...> fmt, Args&&... args) {
     Log_(loc, lvl, fmt, std::forward<Args>(args)...);

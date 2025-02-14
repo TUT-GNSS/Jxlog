@@ -23,18 +23,17 @@ int main() {
   conf.prefix = "loggerdemo";
   conf.pub_key = logger::crypt::BinaryKeyToHex(server_public_key);
   std::cout<<"pri key: "<<logger::crypt::BinaryKeyToHex(server_private_key).data()<<"\n";
-  // private key FAA5BBE9017C96BF641D19D0144661885E831B5DDF52539EF1AB4790C05E665E
   {
     std::shared_ptr<logger::sink::Sink> effective_sink = std::make_shared<logger::sink::EffectiveSink>(conf);
-    logger::Logger handle("test", {effective_sink});
+    logger::Logger handle({effective_sink});
     std::string str = GenerateRandomString(2000);
 
-    auto begin = std::chrono::system_clock::now();
+    auto begin = std::chrono::steady_clock::now();
     for (int i = 0; i < 10; ++i) {
       handle.Log(logger::LogLevel::kInfo, logger::SourceLocation(), " test! Hello Jxlog!!!");
     }
-    effective_sink->Flush();
-    auto end = std::chrono::system_clock::now();
+    handle.Flush();
+    auto end = std::chrono::steady_clock::now();
     std::chrono::milliseconds diff = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
     std::cout << "our logger diff: " << diff.count() << std::endl;
   }
