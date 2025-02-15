@@ -2,9 +2,9 @@
 
 #include <chrono>
 
-#include "src/logger.h"
-#include "src/sinks/console_sink.h"
-#include "src/sinks/effective_sink.h"
+#include "logger/logger.h"
+#include "logger/sinks/console_sink.h"
+#include "logger/sinks/effective_sink.h"
 
 std::string GenerateRandomString(int length) {
   std::string str;
@@ -19,10 +19,10 @@ int main() {
   auto [server_private_key, server_public_key] = logger::crypt::GenECDHKey();
   std::shared_ptr<logger::sink::Sink> sink = std::make_shared<logger::sink::ConsoleSink>();
   logger::sink::EffectiveSink::Conf conf;
-  conf.dir = "./logger";
+  conf.dir = "./example";
   conf.prefix = "loggerdemo";
   conf.pub_key = logger::crypt::BinaryKeyToHex(server_public_key);
-  std::cout<<"pri key: "<<logger::crypt::BinaryKeyToHex(server_private_key).data()<<"\n";
+  std::cout << "pri key: " << logger::crypt::BinaryKeyToHex(server_private_key).data() << "\n";
   {
     std::shared_ptr<logger::sink::Sink> effective_sink = std::make_shared<logger::sink::EffectiveSink>(conf);
     logger::Logger handle({effective_sink});

@@ -7,7 +7,7 @@ set(CMAKE_OSX_ARCHITECTURES "arm64" CACHE STRING "Target architecture")
 
 
 
-include_directories("/Users/jixi/Documents/code/JxLog/src") # 头文件目录
+include_directories("/Users/jixi/Documents/code/JxLog/logger") # 头文件目录
 
 set(CMAKE_CXX_STANDARD 17)
 

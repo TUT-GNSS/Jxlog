@@ -7,11 +7,11 @@
 #include <vector>
 
 #include "decode_formatter.h"
-#include "src/compress/zstd_compress.h"
-#include "src/compress/zlib_compress.h"
-#include "src/crypt/aes_crypt.h"
-#include "src/helpers/internal_log.h"
-#include "src/sinks/effective_sink.h"
+#include "logger/compress/zlib_compress.h"
+#include "logger/compress/zstd_compress.h"
+#include "logger/crypt/aes_crypt.h"
+#include "logger/helpers/internal_log.h"
+#include "logger/sinks/effective_sink.h"
 
 using namespace logger;
 using namespace logger::detail;
@@ -121,7 +121,8 @@ void DecodeFile(const std::string& input_file_path, const std::string& pri_key, 
     output.clear();
     // 跳至数据
     offset += sizeof(ChunkHeader);
-    DecodeChunkData(input.data() + offset, chunk_header->size, std::string(chunk_header->pub_key, 65), pri_key, chunk_header->iv, output);
+    DecodeChunkData(input.data() + offset, chunk_header->size, std::string(chunk_header->pub_key, 65), pri_key,
+                    chunk_header->iv, output);
     // 跳至下一ChunkHeader
     offset += chunk_header->size;
     // 数据输出到文件

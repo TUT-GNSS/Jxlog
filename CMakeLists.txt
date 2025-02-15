@@ -6,7 +6,7 @@ project(${PROJECT_NAME} VERSION 1.1.1.1)
 
 add_definitions(-DENABLE_LOG=1)
 
-set(INCDIRS . ${CMAKE_BINARY_DIR} src)
+set(INCDIRS . ${CMAKE_BINARY_DIR} logger)
 include_directories(${INCDIRS})
 
 set(CMAKE_CXX_STANDARD 17)
@@ -44,6 +44,6 @@ else()
     add_definitions(-DNDEBUG)
 endif()
 
-add_subdirectory(src)
+add_subdirectory(logger)
 add_subdirectory(decode)
 add_subdirectory(example)

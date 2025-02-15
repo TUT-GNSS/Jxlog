@@ -1,17 +1,17 @@
 # 忽略 build 目录
-src/build
+logger/build
 build
 decode/build
 
 
 # 忽略 src.code-workspace 文件
-src/src.code-workspace
+logger/src.code-workspace
 
 # 忽略 .vscode
 .vscode
-src/.vscode
+logger/.vscode
 
 # 忽略test
-src/test.cpp
+logger/test.cpp
 
 .DS_Store

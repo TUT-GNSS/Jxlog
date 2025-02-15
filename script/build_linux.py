@@ -24,7 +24,7 @@ def gene_proto_buf_source_file(out_dir):
     if sys.platform.startswith("win"):
         protoc_path = get_project_path() + "/script/bin/protoc.exe"
 
-    build_cmd = "{0} -I={1}/src/proto --cpp_out={2} {1}/src/proto/*.proto".format(
+    build_cmd = "{0} -I={1}/logger/proto --cpp_out={2} {1}/logger/proto/*.proto".format(
         protoc_path, get_project_path(), out_dir
     )
     ret = os.system(build_cmd)
