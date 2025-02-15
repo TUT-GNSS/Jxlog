@@ -1,7 +1,5 @@
 #pragma once
 
-#define ENABLE_LOG 1
-
 #ifdef ENABLE_LOG
 
 #include "fmt/chrono.h"

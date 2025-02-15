@@ -6,7 +6,7 @@ project(${PROJECT_NAME} VERSION 1.1.1.1)
 
 add_definitions(-DENABLE_LOG=1)
 
-set(INCDIRS . ${CMAKE_BINARY_DIR} logger)
+set(INCDIRS . ${CMAKE_BINARY_DIR} logger include)
 include_directories(${INCDIRS})
 
 set(CMAKE_CXX_STANDARD 17)
