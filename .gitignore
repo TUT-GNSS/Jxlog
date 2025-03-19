@@ -15,3 +15,12 @@ logger/.vscode
 logger/test.cpp
 
 .DS_Store
+
+# 忽略 decode 目录
+decode/build
+decode/src.code-workspace
+decode/.vscode
+decode/test.cpp
+
+.idea
+./cmake-build-debug
