@@ -29,7 +29,7 @@ EffectiveSink::EffectiveSink(Conf conf) : conf_(conf) {
   std::string svr_pub_key_bin = crypt::HexKeyToBinary(conf_.pub_key);
   // std::string svr_pub_key_bin = conf_.pub_key;
   std::string shared_secret = crypt::GenECDHSharedSecret(client_pri, svr_pub_key_bin);
-  LOG_INFO("shared_secret: {}",crypt::BinaryKeyToHex(shared_secret));
+  // LOG_INFO("shared_secret: {}",crypt::BinaryKeyToHex(shared_secret));
   crypt_ = std::make_unique<crypt::AESCrypt>(shared_secret);
   // 初始化compress_
   compress_ = std::make_unique<compress::ZstdCompression>();
@@ -38,7 +38,9 @@ EffectiveSink::EffectiveSink(Conf conf) : conf_(conf) {
   slave_cache_ = std::make_unique<mmap::MMapper>(conf_.dir / "slave_cache");
   // 创建mmap失败
   if (!master_cache_ || !slave_cache_) {
-    throw std::runtime_error("EffectiveSink::EffectiveSink: create mmap failed");
+    LOG_ERROR("EffectiveSink::EffectiveSink: create mmap failed");
+    // throw std::runtime_error("EffectiveSink::EffectiveSink: create mmap failed");
+    return;
   }
   // 从缓冲区非空,则先将从缓冲区任务写入文件
   if (!slave_cache_->Empty()) {
@@ -217,7 +219,7 @@ std::filesystem::path EffectiveSink::GetFilePath_() {
       }
     }
   }
-  LOG_INFO("EffectiveSink::GetFilePath_: log_file_path={}", log_file_path_.string());
+  // LOG_INFO("EffectiveSink::GetFilePath_: log_file_path={}", log_file_path_.string());
   return log_file_path_;
 }
 

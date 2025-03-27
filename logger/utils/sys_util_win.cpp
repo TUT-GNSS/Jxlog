@@ -3,6 +3,8 @@
 
 #include "utils/sys_util.h"
 
+// Windows版本使用Win32 API
+
 namespace logger {
 namespace utils {
 

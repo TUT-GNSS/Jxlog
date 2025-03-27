@@ -5,6 +5,8 @@
 
 #include "utils/sys_util.h"
 
+// Linux版本使用POSIX API
+
 namespace logger {
 namespace utils {
 
